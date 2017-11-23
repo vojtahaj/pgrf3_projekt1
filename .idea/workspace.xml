@@ -12,11 +12,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-85">
-              <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+            <state relative-caret-position="-68">
+              <caret line="132" column="0" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+              <folding>
+                <marker date="1511448684109" expanded="true" signature="5683:5763" ph="{...}" />
+                <marker date="1511448684109" expanded="true" signature="5813:5817" ph="{}" />
+                <marker date="1511448684109" expanded="true" signature="5864:5868" ph="{}" />
+                <marker date="1511448684109" expanded="false" signature="5928:5933" ph=" { " />
+                <marker date="1511448684109" expanded="false" signature="5995:5998" ph=" }" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MeshGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/MeshGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-533">
+              <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simple.vert" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simple.frag" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -75,6 +111,33 @@
             <path>
               <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
               <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
+              <item name="shaders" type="462c0819:PsiDirectoryNode" />
+              <item name="lvl1basic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
+              <item name="shaders" type="462c0819:PsiDirectoryNode" />
+              <item name="lvl1basic" type="462c0819:PsiDirectoryNode" />
+              <item name="p01cube" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
+              <item name="shaders" type="462c0819:PsiDirectoryNode" />
+              <item name="lvl1basic" type="462c0819:PsiDirectoryNode" />
+              <item name="skolni" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
+              <item name="shaders" type="462c0819:PsiDirectoryNode" />
+              <item name="lvl1basic" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -82,6 +145,12 @@
               <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="projekt1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -235,7 +304,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="604000" />
+    <option name="totallyTimeSpent" value="665000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -280,11 +349,71 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/skolni/simple.frag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/skolni/simple.vert">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="21" column="32" lean-forward="false" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/MeshGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-533">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        <state relative-caret-position="-34">
+          <caret line="134" column="0" lean-forward="true" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+          <folding>
+            <marker date="1511448684109" expanded="true" signature="5683:5763" ph="{...}" />
+            <marker date="1511448684109" expanded="true" signature="5813:5817" ph="{}" />
+            <marker date="1511448684109" expanded="true" signature="5864:5868" ph="{}" />
+            <marker date="1511448684109" expanded="false" signature="5928:5933" ph=" { " />
+            <marker date="1511448684109" expanded="false" signature="5995:5998" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-68">
+          <caret line="132" column="0" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+          <folding>
+            <marker date="1511448684109" expanded="true" signature="5683:5763" ph="{...}" />
+            <marker date="1511448684109" expanded="true" signature="5813:5817" ph="{}" />
+            <marker date="1511448684109" expanded="true" signature="5864:5868" ph="{}" />
+            <marker date="1511448684109" expanded="false" signature="5928:5933" ph=" { " />
+            <marker date="1511448684109" expanded="false" signature="5995:5998" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
