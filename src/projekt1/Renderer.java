@@ -25,7 +25,7 @@ import java.awt.event.*;
 public class Renderer implements GLEventListener, MouseListener,
 		MouseMotionListener, KeyListener {
 
-	int width, height, ox, oy;
+	int width, height, ox, oy, polygonMode = GL2GL3.GL_FILL;
 
 	OGLBuffers buffers;
 	OGLTextRenderer textRenderer;
@@ -224,6 +224,12 @@ public class Renderer implements GLEventListener, MouseListener,
 		case KeyEvent.VK_F:
 			cam = cam.mulRadius(1.1f);
 			break;
+		case KeyEvent.VK_L:
+				polygonMode = GL2GL3.GL_LINE;
+				break;
+		case KeyEvent.VK_P:
+				polygonMode = GL2GL3.GL_FILL;
+				break;
 		}
 	}
 
