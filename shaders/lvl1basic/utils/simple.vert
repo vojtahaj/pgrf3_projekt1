@@ -8,6 +8,9 @@ uniform vec3 camera;
 //uniform float lightType; //podle druhu lightType pouzije osvetleni
 //uniform float telesoType; //podle druhu telesoType vypocita spravne normaly
 
+out vec3 outNormal; //vypocitane normaly do fragment shaderu
+out vec3 outPosition;
+
 const float PI = 3.14154926;
 const float DELTA = 0.001;
 
@@ -114,11 +117,13 @@ vec3 normal(vec2 paramPos, float teleso){
     //vec3 tx = sphere(paramPos+dx) - sphere(paramPos-dx); //je reseno v surface
     //vec3 ty = sphere(paramPos+dy) - sphere(paramPos-dy); //je reseno v surface
     //return normalize(cross(tx,ty)); //mozna nemusime normalizovat, normalizujeme ve fragment shaderu
-    return surface(teleso, paramPos, dx,dy);
+    return normalize(surface(teleso, paramPos, dx,dy));
 }
 vec3 phong(vec2 paramPos, float telesoType){ //v fragment shaderu bude per pixel, ted je per vertex
     vec3 inNormal = normal(paramPos, telesoType); //vypocet normal pro dane teleso
+    outNormal = inNormal;
     vec3 position = surfacePosition(paramPos, telesoType);
+    outPosition = position;
 
     vec3 matDifCol = vec3(0.8, 0.9, 0.6);
     vec3 matSpecCol = vec3(1.0);
@@ -139,7 +144,9 @@ vec3 phong(vec2 paramPos, float telesoType){ //v fragment shaderu bude per pixel
 }
 vec3 blinPhong(vec2 paramPos, float telesoType){ //v fragment shaderu bude per pixel, ted je per vertex
     vec3 inNormal = normal(paramPos, telesoType); //vypocet normal pro dane teleso
+    outNormal = inNormal;
     vec3 position = surfacePosition(paramPos,telesoType);
+    outPosition = position;
 
     vec3 matDifCol = vec3(0.8, 0.9, 0.6);
     vec3 matSpecCol = vec3(1.0);
@@ -165,14 +172,15 @@ vec3 blinPhong(vec2 paramPos, float telesoType){ //v fragment shaderu bude per p
 }
 
 void main() {
-    float lightType = 1.0; //better uniform
+    float lightType = 2.0; //better uniform
     float telesoType = 7.0; //beter uniform
    // gl_Position = mat * vec4(sphere(inPosition),1.0);
+   // gl_Position = mat * vec4(trumpet(inPosition),1.0);
    // gl_Position = mat * vec4(sphericElephant(inPosition),1.0);
    // gl_Position = mat * vec4(sphericFan(inPosition),1.0);
    // gl_Position = mat * vec4(cylindricSombrero(inPosition),1.0);
    // gl_Position = mat * vec4(something(inPosition),1.0);
-   gl_Position = mat * vec4(cylindricPenthal(inPosition),1.0);
+    gl_Position = mat * vec4(cylindricPenthal(inPosition),1.0);
     if (lightType == 1.0){ //Phonguv osvetlovaci model
        vertColor =  phong(inPosition, telesoType);
     }
