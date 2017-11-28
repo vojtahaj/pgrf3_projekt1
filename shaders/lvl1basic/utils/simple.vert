@@ -12,50 +12,68 @@ const float PI = 3.14154926;
 const float DELTA = 0.001;
 
 vec3 sphere(vec2 paramPos){
-    float a = paramPos.x * 2 * PI; //azimuth
-    float z = (paramPos.y - 0.5)*PI; //zenith
+    float z = paramPos.x * 2 * PI; //zenith
+    float a = (paramPos.y - 0.5)*PI; //azimut
     return vec3 (
-    cos(a)*cos(z),
-    sin(a)*cos(z),
-    sin(z)
+    cos(z)*cos(a),
+    sin(z)*cos(a),
+    sin(a)
     );
 
 }
 vec3 trumpet(vec2 paramPos){
 //trumpeta
-    float a = paramPos.x * 2 * PI; //azimuth
-    float z = paramPos.y * 17; //zenith
+    float z = paramPos.x * 2 * PI; //zenith
+    float a = paramPos.y * 17; //azimut
     return vec3 (
-        z,
-        6/(pow((z+1),0.7))*cos(a),
-        6/(pow((z+1),0.7))*sin(z)
+        a,
+        6/(pow((a+1),0.7))*cos(z),
+        6/(pow((a+1),0.7))*sin(a)
         );
 }
 vec3 something(vec2 paramPos){
-float a = 2 * PI * paramPos.x;
+float z = 2 * PI * paramPos.x; //zenith
     return vec3(
-        cos(a) * paramPos.y,
-        sin(a) * paramPos.y,
+        cos(z) * paramPos.y,
+        sin(z) * paramPos.y,
         (1 - paramPos.y)
     );
 }
 vec3 sphericElephant(vec2 paramPos){ //Elephant ve sferickych souradnicich
-    float a = paramPos.x * PI; //azimut - podle x
-    float z = paramPos.y * 2 * PI; //zenith - podle y
-    float R = 3.0 + cos(4 * z);
+    float z = paramPos.x * PI; //zenith - podle x
+    float a = paramPos.y * 2 * PI; //azimut - podle y
+    float R = 3.0 + cos(4 * a);
 
-    return vec3(R * sin(a) * cos(z), R * sin(a) * sin(z), R * cos(a));
+    return vec3(R * sin(z) * cos(a), R * sin(z) * sin(a), R * cos(z));
+}
+vec3 sphericFan(vec2 paramPos){//rho = sin(s), phi=t-1, theta = sqrt(s)
+    float z = paramPos.y * 2* PI;// azimut
+    float a = paramPos.x * PI;//zenith
+    float R = sin (z);
+
+    return vec3(R * sin(a-1) * cos(sqrt(z)),R*sin(a-1)*sin(sqrt(z)),R*cos(a-1));
 }
 vec3 cylindricSombrero(vec2 paramPos){
     float s = paramPos.y * 2 * PI; //parametry s,t <0;2Pi>, zenit azimut
     float t = paramPos.x * 2 * PI;
 
     float R = t;
-    float z = 2*sin(t);
+    float z = 2 * sin(t);
 
     return vec3(R * cos(s), R * sin(s), z);
 }
+vec3 cylindricPenthal(vec2 paramPos){
+    // mela by to byt fce r = -3, theta = s*4, z = sqrt(t)
+    // avsak vykresluje neco jineho, nez by podle http://www.math.uri.edu/~bkaskosz/flashmo/tools/cylin/ mela
+    float s = paramPos.y * 2 * PI;
+    //float t = paramPos.x; spatny rozsah
+    float t = (paramPos.x - 0.5) * 2;
 
+    float R = t-3;
+    float z = sqrt(t);
+
+    return vec3(R * cos(s*4), R * sin((s*4)), z);
+}
 vec3 surface(float teleso,vec2 paramPos, vec2 dx, vec2 dy){
     if (teleso == 1.0)
         return vec3(normalize(cross(sphere(paramPos+dx) - sphere(paramPos-dx),sphere(paramPos+dy) - sphere(paramPos-dy))));
@@ -66,7 +84,11 @@ vec3 surface(float teleso,vec2 paramPos, vec2 dx, vec2 dy){
     if (teleso == 4.0)
         return vec3(normalize(cross(sphericElephant(paramPos+dx) - sphericElephant(paramPos-dx),sphericElephant(paramPos+dy) - sphericElephant(paramPos-dy))));
     if (teleso == 5.0)
+        return vec3(normalize(cross(sphericFan(paramPos+dx) - sphericFan(paramPos-dx),sphericFan(paramPos+dy) - sphericFan(paramPos-dy))));
+    if (teleso == 6.0)
         return vec3(normalize(cross(cylindricSombrero(paramPos+dx) - cylindricSombrero(paramPos-dx),cylindricSombrero(paramPos+dy) - cylindricSombrero(paramPos-dy))));
+    if (teleso == 7.0)
+        return vec3(normalize(cross(cylindricPenthal(paramPos+dx) - cylindricPenthal(paramPos-dx),cylindricPenthal(paramPos+dy) - cylindricPenthal(paramPos-dy))));
     return vec3(0,0,1);
 }
 vec3 surfacePosition(vec2 paramPos, float teleso){ //vypocet souradnic pro normaly
@@ -79,7 +101,11 @@ vec3 surfacePosition(vec2 paramPos, float teleso){ //vypocet souradnic pro norma
         if (teleso == 4.0)
             return vec3(sphericElephant(paramPos));
         if (teleso == 5.0)
+            return vec3(sphericFan(paramPos));
+        if (teleso == 6.0)
             return vec3(cylindricSombrero(paramPos));
+        if (teleso == 7.0)
+            return vec3(cylindricPenthal(paramPos));
         return vec3(0,0,1);
 }
 vec3 normal(vec2 paramPos, float teleso){
@@ -140,12 +166,13 @@ vec3 blinPhong(vec2 paramPos, float telesoType){ //v fragment shaderu bude per p
 
 void main() {
     float lightType = 1.0; //better uniform
-    float telesoType = 1.0; //beter uniform
-    gl_Position = mat * vec4(sphere(inPosition),1.0);
+    float telesoType = 7.0; //beter uniform
+   // gl_Position = mat * vec4(sphere(inPosition),1.0);
    // gl_Position = mat * vec4(sphericElephant(inPosition),1.0);
-   // gl_Position = mat * vec4(sphericElephant(inPosition),1.0);
+   // gl_Position = mat * vec4(sphericFan(inPosition),1.0);
    // gl_Position = mat * vec4(cylindricSombrero(inPosition),1.0);
    // gl_Position = mat * vec4(something(inPosition),1.0);
+   gl_Position = mat * vec4(cylindricPenthal(inPosition),1.0);
     if (lightType == 1.0){ //Phonguv osvetlovaci model
        vertColor =  phong(inPosition, telesoType);
     }
