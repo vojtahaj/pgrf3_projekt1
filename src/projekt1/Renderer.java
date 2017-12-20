@@ -62,7 +62,7 @@ public class Renderer implements GLEventListener, MouseListener,
         texture = new OGLTexture2D(gl, "/textures/bricks.jpg");
 
         lightPosArray.add(new Vec3D(0, 0, 10));
-        lightPosArray.add(new Vec3D(5, 5, -3));
+        lightPosArray.add(new Vec3D(0, 0, -10));
 
         gl.glTexParameteri(GL2GL3.GL_TEXTURE_2D, GL2GL3.GL_TEXTURE_WRAP_S, GL2GL3.GL_REPEAT);
         gl.glTexParameteri(GL2GL3.GL_TEXTURE_2D, GL2GL3.GL_TEXTURE_WRAP_T, GL2GL3.GL_REPEAT);

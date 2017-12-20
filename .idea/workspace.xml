@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63f2651-9b8c-43ce-b342-07105c41d116" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/projekt1/Renderer.class" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/projekt1/Renderer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/utils/MeshGenerator.class" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/utils/MeshGenerator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PGRF3_projekt1.iml" afterPath="$PROJECT_DIR$/PGRF3_projekt1.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/p02geometry/p01cube/simple.frag" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/p02geometry/p01cube/simple.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.frag" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.vert" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.vert" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/lvl1basic/p02geometry/p01cube/simple.frag" afterPath="$PROJECT_DIR$/shaders/lvl1basic/p02geometry/p01cube/simple.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" afterPath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" afterPath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/projekt1/Renderer.java" afterPath="$PROJECT_DIR$/src/projekt1/Renderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/MeshGenerator.java" afterPath="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +21,8 @@
       <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state relative-caret-position="267">
+              <caret line="64" column="37" lean-forward="false" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -48,8 +41,8 @@
       <file leaf-file-name="simple.frag" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-68">
-              <caret line="10" column="38" lean-forward="false" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+            <state relative-caret-position="-776">
+              <caret line="28" column="58" lean-forward="false" selection-start-line="28" selection-start-column="58" selection-end-line="28" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -77,9 +70,9 @@
       <list>
         <option value="$PROJECT_DIR$/shaders/lvl1basic/p02geometry/p01cube/simple.frag" />
         <option value="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
-        <option value="$PROJECT_DIR$/src/projekt1/Renderer.java" />
         <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
         <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
+        <option value="$PROJECT_DIR$/src/projekt1/Renderer.java" />
       </list>
     </option>
   </component>
@@ -308,7 +301,7 @@
       <workItem from="1512042253269" duration="7122000" />
       <workItem from="1512494210568" duration="7017000" />
       <workItem from="1513195812707" duration="3807000" />
-      <workItem from="1513774110848" duration="6850000" />
+      <workItem from="1513774110848" duration="7673000" />
     </task>
     <task id="LOCAL-00001" summary="add spheric and cylindric function&#10;&#10;pridane sfericke a cylindricke fce (trumpeta, sloni hlava, sombrero)">
       <created>1511731949720</created>
@@ -338,11 +331,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511904253914</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Reflektorove svetlo&#10;&#10;U blinn-phonga ve fragment shaderu&#10;drobne upravy u teles...">
+      <created>1513781943402</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1513781943402</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69560000" />
+    <option name="totallyTimeSpent" value="70383000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -388,7 +388,8 @@
     <MESSAGE value="Upraveni vypoctu normal&#10;&#10;vypocet normal a pozice pro osvetleni podle druhu telesa" />
     <MESSAGE value="Doplneni sferickych a cylindrickych funkci&#10;&#10;Vertex shader doplnen o cylindricke a sfericke souradnice" />
     <MESSAGE value="Add light to fragment shader&#10;&#10;Doplneni osvetleni (Phong, i Blin-Phong) do fragment shaderu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add light to fragment shader&#10;&#10;Doplneni osvetleni (Phong, i Blin-Phong) do fragment shaderu" />
+    <MESSAGE value="Reflektorove svetlo&#10;&#10;U blinn-phonga ve fragment shaderu&#10;drobne upravy u teles..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Reflektorove svetlo&#10;&#10;U blinn-phonga ve fragment shaderu&#10;drobne upravy u teles..." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -662,14 +663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -678,10 +671,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="64" column="37" lean-forward="false" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="10" column="38" lean-forward="false" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+        <state relative-caret-position="-776">
+          <caret line="28" column="58" lean-forward="false" selection-start-line="28" selection-start-column="58" selection-end-line="28" selection-end-column="58" />
           <folding />
         </state>
       </provider>

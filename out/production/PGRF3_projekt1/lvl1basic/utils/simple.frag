@@ -1,4 +1,6 @@
 #version 150
+const int LIGHTCOUNT = 2;
+
 in vec2 inPosition;
 in vec3 vertColor;
 in vec3 outPosition;
@@ -6,11 +8,12 @@ in vec3 outNormal;
 in vec2 textureCoord;
 
 uniform vec3 lightPos;
+uniform vec3 lightPosArray[LIGHTCOUNT];
 uniform vec3 camera;
 uniform sampler2D textureID;
 uniform float teleso;
 
-vec3 phong(vec3 position){
+void phong(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, out vec3 specular ){
      vec3 inNormal = outNormal;
 
      vec3 matDifCol = vec3(0.8, 0.9, 0.6);
@@ -20,16 +23,18 @@ vec3 phong(vec3 position){
 
      vec3 ambiComponent = ambientLightCol * matDifCol;
 
-     float difCoef = max(0, dot(inNormal, normalize(lightPos-position)));
+     float difCoef = max(0, dot(inNormal, normalize(lightPosArray[numberOfLight]-position)));
      vec3 difComponent = directLightCol * matDifCol * difCoef;
 
-     vec3  reflected = reflect(normalize(position-lightPos), inNormal);
+     vec3  reflected = reflect(normalize(position-lightPosArray[numberOfLight]), inNormal);
      float specCoef = pow(max(0, dot(normalize(camera-position),reflected)), 70);
 
      vec3 specComponent = directLightCol * matSpecCol * specCoef;
 
-
-     return ambiComponent + (difComponent + specComponent);
+    ambient = ambiComponent;
+    diffuse = difComponent;
+    specular = specComponent;
+     //return ambiComponent + (difComponent + specComponent);
 }
 vec3 blinPhong(vec3 position){
     vec3 inNormal = outNormal;
@@ -71,5 +76,20 @@ void main() {
 	//gl_FragColor = vec4(vertColor, 1.0);
 	//gl_FragColor = vec4(phong(outPosition),1.0);
 	//gl_FragColor = /*vec4(vertColor, 1.0)**/texture(textureID,textureCoord);
-	gl_FragColor = vec4(blinPhong(outPosition),1.0);
+	vec3 ambientSum = vec3(0);
+	vec3 diffSum = vec3(0);
+	vec3 specSum = vec3(0);
+
+	vec3 ambient, diffuse, specular;
+
+	 for (int i = 0; i<LIGHTCOUNT; i++){
+	 phong(outPosition, i, ambient, diffuse, specular);
+	 ambientSum += ambient;
+	 diffSum += diffuse;
+	 specSum += specular;
+	 }
+	ambientSum /= LIGHTCOUNT;
+	gl_FragColor = vec4 (ambientSum + diffSum + specSum,1);
+
+	//gl_FragColor = vec4(blinPhong(outPosition),1.0);
 }

@@ -1,4 +1,5 @@
 #version 150
+const int LIGHTCOUNT = 2;
 in vec2 inPosition; // input from the vertex buffer
 
 out vec3 vertColor; // output from this shader to the next pipeline stage
@@ -7,7 +8,7 @@ uniform mat4 mat; // variable constant for all vertices in a single draw
 
 uniform vec3 lightPos;
 uniform vec3 camera;
-uniform vec3 lightPosArray[2];
+uniform vec3 lightPosArray[LIGHTCOUNT];
 //uniform float lightType; //podle druhu lightType pouzije osvetleni
 uniform float teleso; //teleso, ktere se bude kreslit
 
