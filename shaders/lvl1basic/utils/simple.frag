@@ -11,7 +11,8 @@ uniform vec3 lightPos;
 uniform vec3 lightPosArray[LIGHTCOUNT];
 uniform vec3 camera;
 uniform sampler2D textureID;
-uniform float teleso;
+uniform int teleso;
+uniform int lightType;
 
 void phong(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, out vec3 specular ){
      vec3 inNormal = outNormal;
@@ -34,10 +35,9 @@ void phong(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, 
     ambient = ambiComponent;
     diffuse = difComponent;
     specular = specComponent;
-     //return ambiComponent + (difComponent + specComponent);
 }
 vec3 blinPhong(vec3 position){
-    vec3 inNormal = outNormal;
+    vec3 inNormal = normalize(outNormal);
 
     vec3 matDifCol = vec3(0.8, 0.9, 0.6);
     vec3 matSpecCol = vec3(1.0);
@@ -89,7 +89,8 @@ void main() {
 	 specSum += specular;
 	 }
 	ambientSum /= LIGHTCOUNT;
-	gl_FragColor = vec4 (ambientSum + diffSum + specSum,1);
+	gl_FragColor = vec4 (ambientSum + diffSum + specSum, 1);
 
 	//gl_FragColor = vec4(blinPhong(outPosition),1.0);
+	gl_FragColor = vec4(normalize(outNormal) + 0.5 * 0.5, 1.0);
 }

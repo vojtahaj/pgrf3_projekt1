@@ -34,7 +34,7 @@ public class Renderer implements GLEventListener, MouseListener,
     OGLTextRenderer textRenderer;
 
     int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso;
-    float typeTeleso = 1f;
+    int typeTeleso = 1;
 
     OGLTexture2D texture;
 
@@ -162,8 +162,7 @@ public class Renderer implements GLEventListener, MouseListener,
         gl.glUniform3fv(locLight, 1, ToFloatArray.convert(lightPos), 0);
         gl.glUniform3fv(locCamera, 1, ToFloatArray.convert(cam.getEye()), 0);
         gl.glUniform3fv(locPositionLight, lightPosArray.size(), ToFloatArray.convert(lightPosArray), 0);
-        gl.glUniform1f(locTeleso,typeTeleso);
-
+        gl.glUniform1i(locTeleso,typeTeleso);
 
        if (boolPolygon)
            gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_FILL); //prepinani mezi line a fill
@@ -266,13 +265,13 @@ public class Renderer implements GLEventListener, MouseListener,
                 boolTexture = !boolTexture;
                 break;
             case KeyEvent.VK_Q:
-                typeTeleso = 2f;
+                typeTeleso = 2;
                 break;
             case KeyEvent.VK_E:
-                typeTeleso = 3f;
+                typeTeleso = 3;
                 break;
             case KeyEvent.VK_T:
-                typeTeleso = 1f;
+                typeTeleso = 1;
                 break;
         }
     }
