@@ -1,11 +1,17 @@
 #version 150
+const int LIGHTCOUNT = 2;
+
 in vec2 inPosition;
 in vec3 vertColor;
 in vec3 outPosition;
 in vec3 outNormal;
+in vec2 textureCoord;
 
 uniform vec3 lightPos;
+uniform float lightPosArray[LIGHTCOUNT];
 uniform vec3 camera;
+uniform sampler2D textureID;
+uniform float teleso;
 
 vec3 phong(vec3 position){
      vec3 inNormal = outNormal;
@@ -25,7 +31,8 @@ vec3 phong(vec3 position){
 
      vec3 specComponent = directLightCol * matSpecCol * specCoef;
 
-     return ambiComponent + difComponent + specComponent;
+
+     return ambiComponent + (difComponent + specComponent);
 }
 vec3 blinPhong(vec3 position){
     vec3 inNormal = outNormal;
@@ -48,13 +55,24 @@ vec3 blinPhong(vec3 position){
         vec3 halfVector = normalize((lightPos-position) + normalize(camera-position));
         specCoef = pow(dot(inNormal,halfVector), 70);
     }
+    vec3 lightDirection = vec3(0,0,-1);
+    //uhel, pro kuzelovite svetlo, ve stupnich
+    float lightCutoff = 10;
+
+    float spotEffect = degrees(acos(dot(normalize(lightDirection),- normalize(lightPos-position))));
+    //vypocet rozmazani
+    float attBlear = clamp((spotEffect - lightCutoff) / (1-lightCutoff),0,1);
+    if (spotEffect > lightCutoff) {
+    return ambiComponent;
+    }
+
     vec3 specComponent = matSpecCol * directLightCol * specCoef;
 
-    return ambiComponent + difComponent + specComponent;
+    return ambiComponent + attBlear *(difComponent  + specComponent);
 }
 void main() {
-//	gl_FragColor = vec4(vertColor, 1.0);
+	//gl_FragColor = vec4(vertColor, 1.0);
 	//gl_FragColor = vec4(phong(outPosition),1.0);
-	gl_FragColor = vec4(vertColor, 1.0);
-	//gl_FragColor = vec4(blinPhong(outPosition),1.0);
+	//gl_FragColor = /*vec4(vertColor, 1.0)**/texture(textureID,textureCoord);
+	gl_FragColor = vec4(blinPhong(outPosition),1.0);
 }
