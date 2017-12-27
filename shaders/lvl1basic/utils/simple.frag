@@ -14,8 +14,6 @@ uniform sampler2D textureID;
 uniform int teleso;
 uniform int lightType;
 
-//int lightType = 1;
-
 void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, out vec3 specular){
      vec3 inNormal = outNormal;
 
@@ -116,17 +114,20 @@ void main() {
 
 	vec3 ambient, diffuse, specular;
 
-	 for (int i = 0; i<LIGHTCOUNT; i++){
+	for (int i = 0; i<LIGHTCOUNT; i++){
 	 light(outPosition, i, ambient, diffuse, specular);
 	 ambientSum += ambient;
 	 diffSum += diffuse;
 	 specSum += specular;
-	 }
+	}
 	ambientSum /= LIGHTCOUNT;
-	gl_FragColor = vec4 (ambientSum + diffSum + specSum, 1);
+	gl_FragColor = vec4 (ambientSum + diffSum + specSum, 1.0);
 
+    if (lightType == 3 || lightType == 4){
+     gl_FragColor = vec4(vertColor, 1.0);
+    }
 	//gl_FragColor = vec4(blinPhong(outPosition),1.0);
-	//gl_FragColor = vec4(normalize(outNormal) + 0.5 * 0.5, 1.0);
-	//gl_FragColor = vec4(outPosition,1.0);
-    //gl_FragColor = vec4(textureCoord,0.0,1.0);
+//	gl_FragColor = vec4(normalize(outNormal) + 0.5 * 0.5, 1.0);
+//	gl_FragColor = vec4(outPosition,1.0);
+//    gl_FragColor = vec4(textureCoord,0.0,1.0);
 }

@@ -35,6 +35,7 @@ public class Renderer implements GLEventListener, MouseListener,
 
     int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso, lightType;
     int typeTeleso = 1, typeLight = 1;
+    int COUNTLIGHT = 4;
 
     OGLTexture2D texture;
 
@@ -258,8 +259,9 @@ public class Renderer implements GLEventListener, MouseListener,
                 cam = cam.mulRadius(1.1f);
                 break;
             case KeyEvent.VK_L:
-               // polygonMode = GL2GL3.GL_LINE;
-                break;
+               typeLight = (typeLight+1) % (COUNTLIGHT+1);
+                System.out.print(typeLight);
+               break;
             case KeyEvent.VK_P:
                 boolPolygon = !boolPolygon;
                 break;
