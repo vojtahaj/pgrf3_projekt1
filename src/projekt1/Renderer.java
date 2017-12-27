@@ -33,14 +33,14 @@ public class Renderer implements GLEventListener, MouseListener,
     OGLBuffers buffers;
     OGLTextRenderer textRenderer;
 
-    int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso;
-    int typeTeleso = 1;
+    int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso, lightType;
+    int typeTeleso = 1, typeLight = 1;
 
     OGLTexture2D texture;
 
     OGLTexture2D.Viewer textureViever;
 
-    Vec3D lightPos = new Vec3D(0, 0, 5);
+    Vec3D lightPos = new Vec3D(0, 0, 10);
     List<Vec3D> lightPosArray = new ArrayList(); // pole vec3d pozic svetla
 
     Camera cam = new Camera();
@@ -80,6 +80,7 @@ public class Renderer implements GLEventListener, MouseListener,
         locCamera = gl.glGetUniformLocation(shaderProgram, "camera");
         locPositionLight = gl.glGetUniformLocation(shaderProgram, "lightPosArray");
         locTeleso = gl.glGetUniformLocation(shaderProgram,"teleso");
+        lightType = gl.glGetUniformLocation(shaderProgram,"lightType");
 
 
         cam = cam.withPosition(new Vec3D(5, 5, 2.5))
@@ -163,6 +164,7 @@ public class Renderer implements GLEventListener, MouseListener,
         gl.glUniform3fv(locCamera, 1, ToFloatArray.convert(cam.getEye()), 0);
         gl.glUniform3fv(locPositionLight, lightPosArray.size(), ToFloatArray.convert(lightPosArray), 0);
         gl.glUniform1i(locTeleso,typeTeleso);
+        gl.glUniform1i(lightType,typeLight);
 
        if (boolPolygon)
            gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_FILL); //prepinani mezi line a fill

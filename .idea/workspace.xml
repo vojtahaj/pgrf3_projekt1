@@ -21,8 +21,8 @@
       <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="64" column="37" lean-forward="false" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
+            <state relative-caret-position="310">
+              <caret line="166" column="14" lean-forward="false" selection-start-line="166" selection-start-column="14" selection-end-line="166" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -31,8 +31,8 @@
       <file leaf-file-name="simple.vert" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="25" />
+            <state relative-caret-position="3706">
+              <caret line="218" column="1" lean-forward="true" selection-start-line="218" selection-start-column="1" selection-end-line="218" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -41,8 +41,8 @@
       <file leaf-file-name="simple.frag" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-776">
-              <caret line="28" column="58" lean-forward="false" selection-start-line="28" selection-start-column="58" selection-end-line="28" selection-end-column="58" />
+            <state relative-caret-position="1395">
+              <caret line="127" column="6" lean-forward="false" selection-start-line="127" selection-start-column="6" selection-end-line="127" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -54,8 +54,14 @@
     <findStrings>
       <find>att</find>
       <find>trump</find>
+      <find>outNormal</find>
+      <find>normal = vec3(cross((sphere(paramPos + dx) - sphere(paramPos - dx)) / (2 * DELTA), (sphere(paramPos + dy) - sphere(paramPos  - dy)) / ( 2 * DELTA)));</find>
       <find>lightPos</find>
+      <find>light</find>
     </findStrings>
+    <replaceStrings>
+      <replace>normal</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -71,8 +77,8 @@
         <option value="$PROJECT_DIR$/shaders/lvl1basic/p02geometry/p01cube/simple.frag" />
         <option value="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
         <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
-        <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
         <option value="$PROJECT_DIR$/src/projekt1/Renderer.java" />
+        <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
       </list>
     </option>
   </component>
@@ -83,8 +89,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="800" />
     <option name="width" value="800" />
     <option name="height" value="860" />
   </component>
@@ -301,7 +306,7 @@
       <workItem from="1512042253269" duration="7122000" />
       <workItem from="1512494210568" duration="7017000" />
       <workItem from="1513195812707" duration="3807000" />
-      <workItem from="1513774110848" duration="7673000" />
+      <workItem from="1513774110848" duration="37850000" />
     </task>
     <task id="LOCAL-00001" summary="add spheric and cylindric function&#10;&#10;pridane sfericke a cylindricke fce (trumpeta, sloni hlava, sombrero)">
       <created>1511731949720</created>
@@ -338,11 +343,25 @@
       <option name="project" value="LOCAL" />
       <updated>1513781943402</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Vicezdrojove svetlo&#10;&#10;U phonga ve fragment shaderu">
+      <created>1513782829380</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1513782829380</updated>
+    </task>
+    <task id="LOCAL-00007" summary="vypocet normal u vypoctu parametru gridu">
+      <created>1513811598466</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1513811598466</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70383000" />
+    <option name="totallyTimeSpent" value="100560000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -354,9 +373,9 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32068062" sideWeight="0.5025" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32068062" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32068062" sideWeight="0.4975" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -389,7 +408,9 @@
     <MESSAGE value="Doplneni sferickych a cylindrickych funkci&#10;&#10;Vertex shader doplnen o cylindricke a sfericke souradnice" />
     <MESSAGE value="Add light to fragment shader&#10;&#10;Doplneni osvetleni (Phong, i Blin-Phong) do fragment shaderu" />
     <MESSAGE value="Reflektorove svetlo&#10;&#10;U blinn-phonga ve fragment shaderu&#10;drobne upravy u teles..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Reflektorove svetlo&#10;&#10;U blinn-phonga ve fragment shaderu&#10;drobne upravy u teles..." />
+    <MESSAGE value="Vicezdrojove svetlo&#10;&#10;U phonga ve fragment shaderu" />
+    <MESSAGE value="vypocet normal u vypoctu parametru gridu" />
+    <option name="LAST_COMMIT_MESSAGE" value="vypocet normal u vypoctu parametru gridu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -665,24 +686,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="25" />
+        <state relative-caret-position="3706">
+          <caret line="218" column="1" lean-forward="true" selection-start-line="218" selection-start-column="1" selection-end-line="218" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="64" column="37" lean-forward="false" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
+        <state relative-caret-position="310">
+          <caret line="166" column="14" lean-forward="false" selection-start-line="166" selection-start-column="14" selection-end-line="166" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-776">
-          <caret line="28" column="58" lean-forward="false" selection-start-line="28" selection-start-column="58" selection-end-line="28" selection-end-column="58" />
+        <state relative-caret-position="1395">
+          <caret line="127" column="6" lean-forward="false" selection-start-line="127" selection-start-column="6" selection-end-line="127" selection-end-column="6" />
           <folding />
         </state>
       </provider>
