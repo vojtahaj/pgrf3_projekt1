@@ -63,6 +63,8 @@ public class MeshGenerator {
                 new OGLBuffers.Attrib(shaderName, 2),
         };
             //System.out.print(vertices);
+        System.out.println(offsets);
+        System.out.println(vertices);
         return new OGLBuffers(
                 gl,
                 ToFloatArray.convert(vertices.toJavaList()),

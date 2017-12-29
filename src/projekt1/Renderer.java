@@ -4,10 +4,7 @@ import com.jogamp.opengl.GL2GL3;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 import oglutils.*;
-import transforms.Camera;
-import transforms.Mat4;
-import transforms.Mat4PerspRH;
-import transforms.Vec3D;
+import transforms.*;
 import utils.MeshGenerator;
 
 import java.awt.event.*;
@@ -28,7 +25,7 @@ public class Renderer implements GLEventListener, MouseListener,
         MouseMotionListener, KeyListener {
 
     int width, height, ox, oy;
-    boolean boolPolygon, boolTexture = false;
+    boolean boolPolygon, boolTexture = true;
 
     OGLBuffers buffers;
     OGLTextRenderer textRenderer;
@@ -37,11 +34,11 @@ public class Renderer implements GLEventListener, MouseListener,
     int typeTeleso = 1, typeLight = 1;
     int COUNTLIGHT = 4;
 
-    OGLTexture2D texture;
+    OGLTexture texture, normTexture;
 
     OGLTexture2D.Viewer textureViever;
 
-    Vec3D lightPos = new Vec3D(0, 0, 10);
+    Vec3D lightPos = new Vec3D(4, 2, 5);
     List<Vec3D> lightPosArray = new ArrayList(); // pole vec3d pozic svetla
 
     Camera cam = new Camera();
@@ -61,6 +58,7 @@ public class Renderer implements GLEventListener, MouseListener,
 
         textureViever = new OGLTexture2D.Viewer(gl);
         texture = new OGLTexture2D(gl, "/textures/bricks.jpg");
+        normTexture = new OGLTexture2D(gl, "/textures/bricksn.png");
 
         lightPosArray.add(new Vec3D(0, 0, 10));
         lightPosArray.add(new Vec3D(0, 0, -10));
@@ -168,14 +166,16 @@ public class Renderer implements GLEventListener, MouseListener,
         gl.glUniform1i(lightType,typeLight);
 
        if (boolPolygon)
-           gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_FILL); //prepinani mezi line a fill
-        else gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_LINE);
+           gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_LINE); //prepinani mezi line a fill
+        else gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
 
         buffers.draw(GL2GL3.GL_TRIANGLES, shaderProgram);
-        if (boolTexture) {
-            texture.bind(shaderProgram, "textureID", 0);
-            textureViever.view(texture, -1, -1, 0.5); //umisteni textury
-        }
+//        if (boolTexture) {
+            texture.bind(shaderProgram, "diffTexture", 0);
+           // textureViever.view(texture, -1, -1, 0.5); //umisteni textury
+            normTexture.bind(shaderProgram,"normTexture",1);
+           // textureViever.view(normTexture, -1, -1, 0.5); //umisteni textury
+//        }
 
         String text = new String(this.getClass().getName() + ": [LMB] camera, WSAD");
 

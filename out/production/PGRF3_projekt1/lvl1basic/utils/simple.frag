@@ -6,15 +6,16 @@ in vec3 vertColor;
 in vec3 outPosition;
 in vec3 outNormal;
 in vec2 textureCoord;
+in vec3 lightVec;
+in vec3 eyeVec;
 
 uniform vec3 lightPos;
 uniform vec3 lightPosArray[LIGHTCOUNT];
 uniform vec3 camera;
-uniform sampler2D textureID;
+uniform sampler2D diffTexture;
+uniform sampler2D normTexture;
 uniform int teleso;
 uniform int lightType;
-
-//int lightType = 1;
 
 void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, out vec3 specular){
      vec3 inNormal = outNormal;
@@ -106,27 +107,83 @@ vec3 blinPhong(vec3 position){
 
     return ambiComponent + attBlear *(difComponent  + specComponent);
 }
+vec4 phongTex(){
+    vec3 matDifCol = vec3(0.8, 0.9, 0.6);
+    vec3 matSpecCol = vec3(1);
+    vec3 ambientLightCol = vec3(0.3, 0.1, 0.5);
+    vec3 directLightCol = vec3(1.0, 0.9, 0.9); // possibly n
+    // better use uniforms
+
+	vec2 texCoord = textureCoord.xy * vec2(1,-1) + vec2(0,1);
+    vec3 inNormal = texture(normTexture, texCoord).xyz * 2.0 - 1.0;
+
+    vec3 lVec = normalize(lightVec);
+
+    vec3 ambiComponent = ambientLightCol * matDifCol;
+
+    float difCoef = pow(max(0, lVec.z), 0.7) * max(0, dot(inNormal, lVec));
+    vec3 difComponent = directLightCol * matDifCol * difCoef;
+
+    vec3 reflected = reflect(-lVec, inNormal);
+    float specCoef = pow(max(0, lVec.z), 0.7) * pow(max(0,
+        dot(normalize(eyeVec), reflected)
+    ), 70);
+    vec3 specComponent = directLightCol * matSpecCol * specCoef;
+
+	return vec4(ambiComponent + difComponent + specComponent, 1.0);
+	}
 void main() {
-	//gl_FragColor = vec4(vertColor, 1.0);
-	//gl_FragColor = vec4(phong(outPosition),1.0);
-	//gl_FragColor = /*vec4(vertColor, 1.0)**/texture(textureID,textureCoord);
+
 	vec3 ambientSum = vec3(0);
 	vec3 diffSum = vec3(0);
 	vec3 specSum = vec3(0);
 
 	vec3 ambient, diffuse, specular;
 
-	 for (int i = 0; i<LIGHTCOUNT; i++){
+	for (int i = 0; i<LIGHTCOUNT; i++){
 	 light(outPosition, i, ambient, diffuse, specular);
 	 ambientSum += ambient;
 	 diffSum += diffuse;
 	 specSum += specular;
-	 }
+	}
 	ambientSum /= LIGHTCOUNT;
-	gl_FragColor = vec4 (ambientSum + diffSum + specSum, 1);
+	gl_FragColor = vec4 (ambientSum + diffSum + specSum, 1.0);
 
-	//gl_FragColor = vec4(blinPhong(outPosition),1.0);
-	//gl_FragColor = vec4(normalize(outNormal) + 0.5 * 0.5, 1.0);
-	//gl_FragColor = vec4(outPosition,1.0);
-    //gl_FragColor = vec4(textureCoord,0.0,1.0);
+    if (lightType == 3 || lightType == 4){
+     gl_FragColor = vec4(vertColor, 1.0);
+    }
+
+    vec3 matDifCol = vec3(0.8, 0.9, 0.6);
+        vec3 matSpecCol = vec3(1);
+        vec3 ambientLightCol = vec3(0.3, 0.1, 0.5);
+        vec3 directLightCol = vec3(1.0, 0.9, 0.9); // possibly n
+        // better use uniforms
+
+    	vec2 texCoord = textureCoord.xy * vec2(1, -1) + vec2(0, 1);
+        vec3 inNormal = texture(normTexture, texCoord).xyz * 2 - 1;
+
+        vec3 lVec = normalize(lightVec);
+
+        vec3 ambiComponent = ambientLightCol * matDifCol;
+
+        float difCoef = pow(max(0, lVec.z), 0.7) * max(0, dot(inNormal, lVec));
+        vec3 difComponent = directLightCol * matDifCol * difCoef;
+
+        vec3 reflected = reflect(-lVec, inNormal);
+        float specCoef = pow(max(0, lVec.z), 0.7) * pow(max(0,
+            dot(normalize(eyeVec), reflected)
+        ), 70);
+        vec3 specComponent = directLightCol * matSpecCol * specCoef;
+
+    	gl_FragColor = vec4(ambiComponent + difComponent + specComponent, 1.0);
+
+//	gl_FragColor = vec4(blinPhong(outPosition),1.0);
+//	gl_FragColor = vec4(normalize(outNormal) + 0.5 * 0.5, 1.0);
+//	gl_FragColor = vec4(outPosition,1.0);
+//    gl_FragColor = vec4(texCoord,0.0,1.0);
+//    gl_FragColor = vec4(vertColor, 1.0);
+    	//gl_FragColor = vec4(phong(outPosition),1.0);
+//gl_FragColor = vec4(texture(normTexture,textureCoord).rgb,1.0);
+    //	gl_FragColor = /* vec4(outNormal, 1.0) * texture(normTexture, textureCoord) */texture(normTexture, textureCoord);
+//    gl_FragColor = vec4(normalize(lightVec),1.0);
 }
