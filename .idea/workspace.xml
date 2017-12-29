@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63f2651-9b8c-43ce-b342-07105c41d116" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/projekt1/Renderer.class" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/projekt1/Renderer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/utils/MeshGenerator.class" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/utils/MeshGenerator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.frag" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.vert" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.vert" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" afterPath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" afterPath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/projekt1/Renderer.java" afterPath="$PROJECT_DIR$/src/projekt1/Renderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/MeshGenerator.java" afterPath="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,21 +20,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="simple.vert" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
+      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="260" column="25" lean-forward="false" selection-start-line="260" selection-start-column="25" selection-end-line="260" selection-end-column="25" />
+            <state relative-caret-position="255">
+              <caret line="178" column="59" lean-forward="false" selection-start-line="178" selection-start-column="59" selection-end-line="178" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simple.frag" pinned="false" current-in-tab="false">
+      <file leaf-file-name="simple.vert" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="292" column="24" lean-forward="false" selection-start-line="292" selection-start-column="24" selection-end-line="292" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simple.frag" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1089">
-              <caret line="177" column="40" lean-forward="true" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
+            <state relative-caret-position="205">
+              <caret line="192" column="37" lean-forward="false" selection-start-line="192" selection-start-column="37" selection-end-line="192" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -70,9 +79,9 @@
       <list>
         <option value="$PROJECT_DIR$/shaders/lvl1basic/p02geometry/p01cube/simple.frag" />
         <option value="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
+        <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
         <option value="$PROJECT_DIR$/src/projekt1/Renderer.java" />
         <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
-        <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
       </list>
     </option>
   </component>
@@ -114,6 +123,17 @@
             <path>
               <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
               <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="textures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
               <item name="shaders" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -121,18 +141,17 @@
               <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
               <item name="shaders" type="462c0819:PsiDirectoryNode" />
               <item name="lvl1basic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
-              <item name="shaders" type="462c0819:PsiDirectoryNode" />
-              <item name="lvl1basic" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
               <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PGRF3_projekt1" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="projekt1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PGRF3_projekt1" type="b2602c69:ProjectViewProjectNode" />
@@ -297,7 +316,7 @@
       <workItem from="1512042253269" duration="7122000" />
       <workItem from="1512494210568" duration="7017000" />
       <workItem from="1513195812707" duration="3807000" />
-      <workItem from="1513774110848" duration="75378000" />
+      <workItem from="1513774110848" duration="80751000" />
     </task>
     <task id="LOCAL-00001" summary="add spheric and cylindric function&#10;&#10;pridane sfericke a cylindricke fce (trumpeta, sloni hlava, sombrero)">
       <created>1511731949720</created>
@@ -362,11 +381,18 @@
       <option name="project" value="LOCAL" />
       <updated>1514374035042</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Normal mapping">
+      <created>1514572415391</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1514572415391</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138088000" />
+    <option name="totallyTimeSpent" value="143461000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -417,7 +443,8 @@
     <MESSAGE value="vypocet normal u vypoctu parametru gridu" />
     <MESSAGE value="Predelani osvetleni ve FS do jedne metody&#10;&#10;spravne chodi s jednim svetlem..." />
     <MESSAGE value="Predelani osvetleni ve VS do jedne metody&#10;&#10;spravne chodi s jednim svetlem..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Predelani osvetleni ve VS do jedne metody&#10;&#10;spravne chodi s jednim svetlem..." />
+    <MESSAGE value="Normal mapping" />
+    <option name="LAST_COMMIT_MESSAGE" value="Normal mapping" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -684,16 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/textures/bricksh.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/textures/bricksn.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/projekt1/JOGLApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -710,31 +727,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1089">
-          <caret line="177" column="40" lean-forward="true" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-323">
-          <caret line="40" column="38" lean-forward="false" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/textures/bricks.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/textures/bricksn.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/textures/bricksh.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="260" column="25" lean-forward="false" selection-start-line="260" selection-start-column="25" selection-end-line="260" selection-end-column="25" />
+        <state relative-caret-position="230">
+          <caret line="292" column="24" lean-forward="false" selection-start-line="292" selection-start-column="24" selection-end-line="292" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="178" column="59" lean-forward="false" selection-start-line="178" selection-start-column="59" selection-end-line="178" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="192" column="37" lean-forward="false" selection-start-line="192" selection-start-column="37" selection-end-line="192" selection-end-column="37" />
           <folding />
         </state>
       </provider>

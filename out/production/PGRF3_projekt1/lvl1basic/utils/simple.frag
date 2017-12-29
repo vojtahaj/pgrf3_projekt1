@@ -9,11 +9,13 @@ in vec2 textureCoord;
 in vec3 lightVec;
 in vec3 eyeVec;
 
+out vec3 outColor;
 uniform vec3 lightPos;
 uniform vec3 lightPosArray[LIGHTCOUNT];
 uniform vec3 camera;
 uniform sampler2D diffTexture;
 uniform sampler2D normTexture;
+uniform sampler2D bumpTexture;
 uniform int teleso;
 uniform int lightType;
 
@@ -175,8 +177,20 @@ void main() {
         ), 70);
         vec3 specComponent = directLightCol * matSpecCol * specCoef;
 
-    	gl_FragColor = vec4(ambiComponent + difComponent + specComponent, 1.0);
+    	//gl_FragColor = vec4(ambiComponent + difComponent + specComponent, 1.0);
 
+        //parallax mapping
+     //   outColor = vertColor;
+        float scaleL = 0.04;
+        float scaleK = -0.02;
+        float height = texture(bumpTexture,textureCoord).r;
+        float v = height * scaleL + scaleK;
+
+        vec3 eye = normalize(eyeVec);
+        vec2 offset = eye.xy / eye.z * v;
+        texCoord = textureCoord + offset;
+      //  outColor *= texture(diffTexture,texCoord);
+        gl_FragColor = vec4(vertColor * texture(diffTexture,texCoord),1.0);
 //	gl_FragColor = vec4(blinPhong(outPosition),1.0);
 //	gl_FragColor = vec4(normalize(outNormal) + 0.5 * 0.5, 1.0);
 //	gl_FragColor = vec4(outPosition,1.0);

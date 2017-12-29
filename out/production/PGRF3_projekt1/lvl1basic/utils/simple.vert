@@ -257,10 +257,10 @@ mat3 tangentMat(vec2 paramPos){
      vec2 dy = vec2(0, DELTA);
      vec3 tx = (surfaceNormal(paramPos + dx) - surfaceNormal(paramPos - dx)) / (2 * DELTA);
      vec3 ty = (surfaceNormal(paramPos + dy) - surfaceNormal(paramPos - dy)) / (2 * DELTA);
-     vec3 x = normalize(tx);
-     vec3 y = normalize(-ty);
-     vec3 z = cross(x, y);
-     x = cross(y, z);
+     vec3 x = normalize(tx); //normala
+     vec3 y = normalize(-ty); //tangenta
+     vec3 z = cross(x, y); //bitangenta
+     x = cross(y, z); //zajisteni ortonormality
      return mat3(x,y,z);
 
 }
@@ -289,7 +289,8 @@ void main() {
 //    vertColor = vec3(inPosition, 0.0); //parametry vstupniho gridu na x a y
 //    vertColor = vec3(textureCoord, 0.0); // souradnice textury
 //  vertColor = vec3(sphere(inPosition));
-    vertColor = outPosition;
+    //vertColor = outPosition; //normal mapping
+    vertColor = vec3(1);
     mat3 tanMat = tangentMat(inPosition);
     eyeVec =  (camera - outPosition) * tanMat;
    // for (int i=0;i<LIGHTCOUNT;i++)

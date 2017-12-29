@@ -34,7 +34,7 @@ public class Renderer implements GLEventListener, MouseListener,
     int typeTeleso = 1, typeLight = 1;
     int COUNTLIGHT = 4;
 
-    OGLTexture texture, normTexture;
+    OGLTexture texture, normTexture, bumpTexture;
 
     OGLTexture2D.Viewer textureViever;
 
@@ -59,6 +59,7 @@ public class Renderer implements GLEventListener, MouseListener,
         textureViever = new OGLTexture2D.Viewer(gl);
         texture = new OGLTexture2D(gl, "/textures/bricks.jpg");
         normTexture = new OGLTexture2D(gl, "/textures/bricksn.png");
+        bumpTexture = new OGLTexture2D(gl, "/textures/bricksh.png");
 
         lightPosArray.add(new Vec3D(0, 0, 10));
         lightPosArray.add(new Vec3D(0, 0, -10));
@@ -175,6 +176,7 @@ public class Renderer implements GLEventListener, MouseListener,
            // textureViever.view(texture, -1, -1, 0.5); //umisteni textury
             normTexture.bind(shaderProgram,"normTexture",1);
            // textureViever.view(normTexture, -1, -1, 0.5); //umisteni textury
+            bumpTexture.bind(shaderProgram, "bumpTexture",2);
 //        }
 
         String text = new String(this.getClass().getName() + ": [LMB] camera, WSAD");
