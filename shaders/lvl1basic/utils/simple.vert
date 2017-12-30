@@ -1,5 +1,5 @@
 #version 150
-const int LIGHTCOUNT = 1;
+const int LIGHTCOUNT = 2;
 const float PI = 3.14154926;
 const float DELTA = 0.001;
 
@@ -17,7 +17,7 @@ out vec3 outPosition;
 out vec2 textureCoord;
 out vec3 vertColor; // output from this shader to the next pipeline stage
 out vec3 eyeVec;
-out vec3 lightVec;
+out vec3 lightVec[LIGHTCOUNT];
 
 vec3 sphere(vec2 paramPos){
     float z = paramPos.x * 2 * PI; //zenith
@@ -164,7 +164,7 @@ vec3 phong(vec2 paramPos, int lightNum){ //v fragment shaderu bude per pixel, te
 }
 vec3 blinPhong(vec2 paramPos){ //v fragment shaderu bude per pixel, ted je per vertex
     vec3 position = outPosition;
-    vec3 inNormal = outNormal;
+    vec3 inNormal = normalize(outNormal);
 
     vec3 matDifCol = vec3(0.8, 0.9, 0.6);
     vec3 matSpecCol = vec3(1.0);
@@ -189,57 +189,65 @@ vec3 blinPhong(vec2 paramPos){ //v fragment shaderu bude per pixel, ted je per v
     return ambiComponent + difComponent + specComponent;
 }
 void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, out vec3 specular){
-     vec3 inNormal = outNormal;
+      vec3 inNormal = outNormal;
 
-     vec3 matDifCol = vec3(0.8, 0.9, 0.6);
-     vec3 matSpecCol = vec3(1.0);
-     vec3 ambientLightCol = vec3(0.3, 0.1, 0.5);
-     vec3 directLightCol = vec3(1.0, 0.9, 0.9);
+         vec3 matDifCol = vec3(0.8, 0.9, 0.6);
+         vec3 matSpecCol = vec3(1.0);
+         vec3 ambientLightCol = vec3(0.3, 0.1, 0.5);
+         vec3 directLightCol = vec3(1.0, 0.9, 0.9);
 
-     ambient = ambientLightCol * matDifCol;
+        //smer svetla
+        vec3 dirLight = normalize(lightPosArray[numberOfLight] - position );
+        vec3 dirCamera = normalize(position - camera);
 
-     float difCoef = max(0, dot(inNormal, normalize(lightPosArray[numberOfLight] - position)));
-     vec3 difComponent = directLightCol * matDifCol * difCoef;
+         ambient = ambientLightCol * matDifCol;
 
-     vec3  reflected = reflect(normalize(position - lightPosArray[numberOfLight]), inNormal);
-     float specCoef = 0;
+         float difCoef = max(0, dot(inNormal, dirLight));
+          diffuse = directLightCol * matDifCol * difCoef;
+    //     vec3 difComponent = directLightCol * matDifCol * difCoef;
 
-     if (lightType == 3) {// phong
-        specCoef = pow(max(0, dot(normalize(camera - position),reflected)), 70);
+        vec3  reflected = reflect(normalize(position - lightPosArray[numberOfLight]), inNormal);
+         float specCoef = 0.0;
 
-        vec3 specComponent = directLightCol * matSpecCol * specCoef;
+         if (lightType == 3) {// phong
+            specCoef = pow(max(0, dot(dirCamera, reflected)), 70);
 
-//        ambient = ambiComponent;
-//        diffuse = difComponent;
-//        specular = specComponent;
-     }
-     if (lightType == 4){//blinphong
-        specCoef = 0.0;
+            specular = directLightCol * matSpecCol * specCoef;
+    //        vec3 specComponent = directLightCol * matSpecCol * specCoef;
+
+    //        ambient = ambiComponent;
+    //        diffuse = difComponent;
+    //        specular = specComponent;
+         }
+         if (lightType == 4){//blinphong
             //float specCoef = pow(max(0, dot(normalize(camera-position),reflected)), 70);
 
-            if(dot(inNormal, normalize(lightPosArray[numberOfLight] - position)) > 0.0){
-                vec3 halfVector = normalize((lightPosArray[numberOfLight] - position) + normalize(camera - position));
-                specCoef = pow(dot(inNormal, halfVector), 70);
+            if(dot(inNormal, normalize(dirLight)) > 0.0){
+              vec3 halfVector = normalize(dirLight + dirCamera);
+
+              specCoef = pow(dot(inNormal, halfVector), 70);
+              specular = directLightCol * matSpecCol * specCoef;
             }
-     }
-     //reflektorove svetlo
-     vec3 lightDirection = vec3(0,0,-1);
-//      //uhel, pro kuzelovite svetlo, ve stupnich
-     float lightCutoff = 10;
-//
-    float spotEffect = degrees(acos(dot(normalize(lightDirection), -normalize((lightPosArray[numberOfLight] - position)))));
-//    //vypocet rozmazani
-    float attBlear = clamp((spotEffect - lightCutoff) / (1 - lightCutoff),0.0,1.0);
-    if (spotEffect > lightCutoff) {
-        diffuse = vec3(0);
-        specular = vec3(0);
-     }
-    else {
-      vec3 specComponent = matSpecCol * directLightCol * specCoef;
-     specular = attBlear * specComponent;
-     diffuse = attBlear * difComponent;
-    }
-     //return ambiComponent + attBlear *(difComponent  + specComponent);
+         }
+    ////     //reflektorove svetlo
+    //     vec3 lightDirection = vec3(0,0,1);
+    //////      //uhel, pro kuzelovite svetlo, ve stupnich
+    //     float lightCutoff = 10;
+    //////
+    //    float spotEffect = degrees(acos(dot(normalize(lightDirection), normalize(-(lightPosArray[numberOfLight] - position)))));
+    //////    //vypocet rozmazani
+    //    float attBlear = clamp((spotEffect - lightCutoff) / (1 - lightCutoff),0.0,1.0);
+    //    if (spotEffect > lightCutoff) {
+    //        diffuse = vec3(0);
+    //        specular = vec3(0);
+    //     }
+    //    else {
+    //      vec3 specComponent = matSpecCol * directLightCol * specCoef;
+    //     specular = attBlear * specComponent;
+    //     diffuse *= attBlear;
+    //
+    //    }
+         //return ambiComponent + attBlear *(difComponent  + specComponent);
 }
 mat3 tangentMat(vec2 paramPos){
      vec2 dx = vec2(DELTA, 0);
@@ -270,7 +278,7 @@ void main() {
     	 specSum += specular;
      }
     ambientSum /= LIGHTCOUNT;
-   // vertColor = ambientSum + diffSum + specSum;
+    vertColor = ambientSum + diffSum + specSum;
 
     textureCoord = vec2(inPosition.x, inPosition.y);
 
@@ -279,14 +287,14 @@ void main() {
 //    vertColor = vec3(textureCoord, 0.0); // souradnice textury
 //  vertColor = vec3(sphere(inPosition));
     //vertColor = outPosition; //normal mapping
-   if (lightType == 3) vertColor = phong(inPosition,0);
-   if (lightType == 4) vertColor = blinPhong(inPosition);
+//   if (lightType == 3) vertColor = phong(inPosition,0);
+//   if (lightType == 4) vertColor = blinPhong(inPosition);
 
     mat3 tanMat = tangentMat(inPosition);
     eyeVec =  (camera - outPosition) * tanMat;
-//    for (int i=0;i<LIGHTCOUNT;i++)
-//      lightVec = (lightPosArray[i] - outPosition) * tanMat;
-    lightVec = (lightPos - outPosition) * tanMat;
+    for (int i=0;i<LIGHTCOUNT;i++)
+      lightVec[i] = (lightPosArray[i] - outPosition) * tanMat;
+//    lightVec = (lightPos - outPosition) * tanMat;
 
 //    vertColor = sphere(inPosition);
 }
