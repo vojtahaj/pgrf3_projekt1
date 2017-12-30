@@ -239,7 +239,10 @@ public class OGLTexture2D implements OGLTexture {
 		return image;
 	}
 
-	public void bind() {
+	public void bind()
+	{
+		gl.glTexParameteri(GL2GL3.GL_TEXTURE_2D, GL2GL3.GL_TEXTURE_WRAP_S, GL2GL3.GL_REPEAT);
+		gl.glTexParameteri(GL2GL3.GL_TEXTURE_2D, GL2GL3.GL_TEXTURE_WRAP_T, GL2GL3.GL_REPEAT);
 		gl.glBindTexture(GL2GL3.GL_TEXTURE_2D, textureID[0]);
 	}
 

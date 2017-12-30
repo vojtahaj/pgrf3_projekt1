@@ -31,14 +31,14 @@ public class Renderer implements GLEventListener, MouseListener,
     OGLTextRenderer textRenderer;
 
     int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso, lightType;
-    int typeTeleso = 1, typeLight = 1;
+    int typeTeleso = 1, typeLight = 0;
     int COUNTLIGHT = 4;
 
     OGLTexture texture, normTexture, bumpTexture;
 
     OGLTexture2D.Viewer textureViever;
 
-    Vec3D lightPos = new Vec3D(4, 2, 5);
+    Vec3D lightPos = new Vec3D(0, 0, -10);
     List<Vec3D> lightPosArray = new ArrayList(); // pole vec3d pozic svetla
 
     Camera cam = new Camera();
@@ -61,7 +61,7 @@ public class Renderer implements GLEventListener, MouseListener,
         normTexture = new OGLTexture2D(gl, "/textures/bricksn.png");
         bumpTexture = new OGLTexture2D(gl, "/textures/bricksh.png");
 
-        lightPosArray.add(new Vec3D(0, 0, 10));
+       // lightPosArray.add(new Vec3D(0, 0, 10));
         lightPosArray.add(new Vec3D(0, 0, -10));
 
         gl.glTexParameteri(GL2GL3.GL_TEXTURE_2D, GL2GL3.GL_TEXTURE_WRAP_S, GL2GL3.GL_REPEAT);

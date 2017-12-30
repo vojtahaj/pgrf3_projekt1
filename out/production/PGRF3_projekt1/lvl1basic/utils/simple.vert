@@ -1,5 +1,5 @@
 #version 150
-const int LIGHTCOUNT = 2;
+const int LIGHTCOUNT = 1;
 const float PI = 3.14154926;
 const float DELTA = 0.001;
 
@@ -19,13 +19,6 @@ out vec3 vertColor; // output from this shader to the next pipeline stage
 out vec3 eyeVec;
 out vec3 lightVec;
 
-vec3 plane(vec2 paramPos) {
-    return vec3(10 * paramPos, 3);
-}
-
-vec3 planeNormal(vec2 paramPos) {
-    return vec3(0,0,1);
-}
 vec3 sphere(vec2 paramPos){
     float z = paramPos.x * 2 * PI; //zenith
     float a = (0.5 - paramPos.y) * PI; //azimut
@@ -123,7 +116,7 @@ vec3 surface(vec2 paramPos, out vec3 normal){
         }
     return vec3(0,0,1);
 }
-vec3 surfaceNormal(vec2 paramPos){ //vypocet souradnic pro normaly
+vec3 surfacePosition(vec2 paramPos){ //vypocet souradnic gridu
     if (teleso == 1)
         return vec3(sphere(paramPos));
      if (teleso == 2)
@@ -170,10 +163,6 @@ vec3 phong(vec2 paramPos, int lightNum){ //v fragment shaderu bude per pixel, te
     return ambiComponent + difComponent + specComponent;
 }
 vec3 blinPhong(vec2 paramPos){ //v fragment shaderu bude per pixel, ted je per vertex
-//    vec3 inNormal = normal(paramPos); //vypocet normal pro dane teleso
-//    outNormal = inNormal;
-//    vec3 position = surfacePosition(paramPos);
-   // outPosition = position;
     vec3 position = outPosition;
     vec3 inNormal = outNormal;
 
@@ -187,14 +176,14 @@ vec3 blinPhong(vec2 paramPos){ //v fragment shaderu bude per pixel, ted je per v
     float difCoef = max(0, dot(inNormal, normalize(lightPos-position)));
     vec3 difComponent = directLightCol * matDifCol * difCoef;
 
-    vec3  reflected = reflect(normalize(position-lightPos), inNormal);
+    vec3  reflected = reflect(normalize(-(lightPos-position)), inNormal);
     float specCoef = 0.0;
     //float specCoef = pow(max(0, dot(normalize(camera-position),reflected)), 70);
 
-    //if(dot(inNormal,normalize(lightPos-position)) > 0.0){
+    if(difCoef > 0.0){
         vec3 halfVector = normalize(normalize(lightPos-position) + normalize(camera-position));
-        specCoef = max(0, pow(dot(inNormal,halfVector), 70));  //70 lesklost
-   // }
+        specCoef = max(0,pow(dot(inNormal,halfVector), 70));  //70 lesklost
+    }
     vec3 specComponent = matSpecCol * directLightCol * specCoef;
 
     return ambiComponent + difComponent + specComponent;
@@ -255,8 +244,8 @@ void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, 
 mat3 tangentMat(vec2 paramPos){
      vec2 dx = vec2(DELTA, 0);
      vec2 dy = vec2(0, DELTA);
-     vec3 tx = (surfaceNormal(paramPos + dx) - surfaceNormal(paramPos - dx)) / (2 * DELTA);
-     vec3 ty = (surfaceNormal(paramPos + dy) - surfaceNormal(paramPos - dy)) / (2 * DELTA);
+     vec3 tx = (surfacePosition(paramPos + dx) - surfacePosition(paramPos - dx)) / (2 * DELTA);
+     vec3 ty = (surfacePosition(paramPos + dy) - surfacePosition(paramPos - dy)) / (2 * DELTA);
      vec3 x = normalize(tx); //normala
      vec3 y = normalize(-ty); //tangenta
      vec3 z = cross(x, y); //bitangenta
@@ -281,19 +270,21 @@ void main() {
     	 specSum += specular;
      }
     ambientSum /= LIGHTCOUNT;
-    vertColor = ambientSum + diffSum + specSum;
+   // vertColor = ambientSum + diffSum + specSum;
 
-    textureCoord = inPosition;
+    textureCoord = vec2(inPosition.x, inPosition.y);
 
 //    vertColor = vec3(normal(inPosition, telesoType)) * 0.5 + 0.5; // * 0.5 + 0.5 je pro zobrazeni Zapornych normal
 //    vertColor = vec3(inPosition, 0.0); //parametry vstupniho gridu na x a y
 //    vertColor = vec3(textureCoord, 0.0); // souradnice textury
 //  vertColor = vec3(sphere(inPosition));
     //vertColor = outPosition; //normal mapping
-    vertColor = vec3(1);
+   if (lightType == 3) vertColor = phong(inPosition,0);
+   if (lightType == 4) vertColor = blinPhong(inPosition);
     mat3 tanMat = tangentMat(inPosition);
     eyeVec =  (camera - outPosition) * tanMat;
-   // for (int i=0;i<LIGHTCOUNT;i++)
+//    for (int i=0;i<LIGHTCOUNT;i++)
+//      lightVec = (lightPosArray[i] - outPosition) * tanMat;
     lightVec = (lightPos - outPosition) * tanMat;
 
 //    vertColor = sphere(inPosition);
