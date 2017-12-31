@@ -22,6 +22,7 @@ uniform int teleso;
 uniform int lightType;
 uniform int textureFormat; // druh textury - 2-normalMapping, 1-parallaxMapp
 uniform int atten; // utlum ano/ne
+uniform int colPos; // podle parametru bude kreslit souradnice
 
 vec2 offset(){
     float scaleL = 0.04;
@@ -50,7 +51,7 @@ void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, 
         vec2 texCoord = textureCoord.xy * vec2(1, -1) + vec2(0, 1);
         if (textureFormat == 1){ //1 - paralaxMapping
             texCoord = offset();
-            inNormal = texture(normTexture,texCoord).xyz * 2 -1;
+            inNormal = texture(normTexture, texCoord).xyz * 2 - 1;
         }
         if (textureFormat == 2) // normalMap
             inNormal = texture(normTexture, texCoord).xyz * 2 - 1;
@@ -81,18 +82,17 @@ void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, 
      if (lightType == 1 && textureFormat > 0){//phong s texturami
         specCoef = pow(max(0, dirLight.z), 0.7) * pow(max(0, dot(dirCamera, reflected)), 70);
      }
-     specular = directLightCol * matSpecCol * specCoef;
 
      vec3 halfVector = normalize(dirLight + dirCamera);
-     if (lightType == 2){//blinphong
+     if (lightType == 2 && textureFormat > 0){
+             if(dot(inNormal, normalize(dirLight)) > 0.0){
+                 specCoef = pow(max(0, dirLight.z), 0.7) * pow(dot(inNormal, halfVector), 70);
+             }
+          }
+     else if (lightType == 2){//blinphong
         //float specCoef = pow(max(0, dot(normalize(camera-position),reflected)), 70);
         if(dot(inNormal, normalize(dirLight)) > 0.0){
             specCoef = pow(dot(inNormal, halfVector), 70);
-        }
-     }
-     if (lightType == 2 && textureFormat > 0){
-        if(dot(inNormal, normalize(dirLight)) > 0.0){
-            specCoef = pow(max(0, dirLight.z), 0.7) * pow(dot(inNormal, halfVector), 70);
         }
      }
 
@@ -103,12 +103,14 @@ void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, 
      float lightCutoff = 60;
 
      //utlum
-     float att = 0.0;
-     float lightDistance = length(dirLight); // vzdalenost od svetla na povrch
+    float lightDistance = length(dirLight); // vzdalenost od svetla na povrch
+    float att = lightDirArray[numberOfLight].x +
+                          lightDirArray[numberOfLight].y * lightDistance +
+                          lightDisArray[numberOfLight].z * lightDistance * lightDistance;
 
-    if(difCoef > 0.0){
-        att = 1.0 / lightDisArray[numberOfLight].x +
-         lightDisArray[numberOfLight].y * lightDistance +
+    if(difCoef > 0.0 && att != 0.0){
+        att = 1.0 / lightDirArray[numberOfLight].x +
+         lightDirArray[numberOfLight].y * lightDistance +
          lightDisArray[numberOfLight].z * lightDistance * lightDistance;
     }
 
@@ -120,11 +122,10 @@ void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, 
         specular = vec3(0);
      }
     else {
-     vec3 specComponent = matSpecCol * directLightCol * specCoef;
-     specular *= attBlear * specComponent;
+     specular *= attBlear;// * specComponent;
      diffuse *= attBlear;
         if(atten == 1){
-        specular *= att * specComponent;
+        specular *= att;
         diffuse *= att;
      }
     }
@@ -154,17 +155,11 @@ void main() {
     if (textureFormat == 2) gl_FragColor = outC * texture(diffTexture, textureCoord);// normalMap
     if (textureFormat == 0 && (lightType != 3 || lightType != 4)) gl_FragColor = outC;
     if (lightType == 3 || lightType == 4) gl_FragColor = vec4(vertColor, 1.0);
-      //  outColor *= texture(diffTexture,texCoord);
-//      if(texCoord.x > 1.0 || texCoord.y > 1.0 || texCoord.x < 0.0 || texCoord.y < 0)
-//      discard;
-//        gl_FragColor = vec4(/*vertColor */texture(diffTexture,texCoord));
-//	gl_FragColor = vec4(blinPhong(outPosition),1.0);
-//	gl_FragColor = vec4(normalize(outNormal) + 0.5 * 0.5, 1.0);
-//	gl_FragColor = vec4(outPosition,1.0);
-//    gl_FragColor = vec4(texCoord,0.0,1.0);
-//    gl_FragColor = vec4(vertColor, 1.0);
-    	//gl_FragColor = vec4(phong(outPosition),1.0);
-//gl_FragColor = vec4(texture(normTexture,textureCoord).rgb,1.0);
-    //	gl_FragColor = /* vec4(outNormal, 1.0) * texture(normTexture, textureCoord) */texture(normTexture, textureCoord);
-//    gl_FragColor = vec4(normalize(lightVec),1.0);
+
+    if(colPos == 1)
+    gl_FragColor = vec4(textureCoord, 0.000, 1.0);
+    if(colPos == 2)
+    gl_FragColor = vec4(normalize(outNormal) + 0.5 * 0.5, 1.0);
+    if(colPos == 3)
+    gl_FragColor = vec4(outPosition, 1.0);
 }

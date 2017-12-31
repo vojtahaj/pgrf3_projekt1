@@ -222,13 +222,6 @@ void main() {
 
     textureCoord = vec2(inPosition.x, inPosition.y);
 
-//    vertColor = vec3(normal(inPosition, telesoType)) * 0.5 + 0.5; // * 0.5 + 0.5 je pro zobrazeni Zapornych normal
-//    vertColor = vec3(inPosition, 0.0); //parametry vstupniho gridu na x a y
-//    vertColor = vec3(textureCoord, 0.0); // souradnice textury
-//  vertColor = vec3(sphere(inPosition));
-    //vertColor = outPosition; //normal mapping
-
-
     mat3 tanMat = tangentMat(inPosition);
     eyeVec =  (camera - outPosition) * tanMat;
     for (int i=0;i<LIGHTCOUNT;i++)

@@ -1,0 +1,8 @@
+Na zacatku se zobrazi koule, bude cerna
+L - resi osvetleni 1 - Phong FS, 2 - BlinPhong FS, 3 - Phong VS, 4 - blinPhong VS
+M - prepinani mezi texturami 0 - bez textury, 1 - paralaxMapping, 2 - normalMapping
+C - zobrazeni zmeni 1-barvou, 2 - normalou nebo 3-souradnice pozice
+U - zapne/vypne utlum
+P - zapne/vypne polygonMode (fill, line)
+udaje o zmenach se vypisuji do konzole
+WSAD, ctrl, shift - pohyb ve scene

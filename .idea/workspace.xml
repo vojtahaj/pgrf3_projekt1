@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f63f2651-9b8c-43ce-b342-07105c41d116" name="Default" comment="">
+    <list default="true" id="f63f2651-9b8c-43ce-b342-07105c41d116" name="Default" comment="Ovladani - moznost prepinani zobrazeni na vystupu&#10;&#10;dopleneni o zobrazeni normaly, pozici, barvu">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/projekt1/Renderer.class" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/projekt1/Renderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/utils/MeshGenerator.class" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/utils/MeshGenerator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.frag" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.frag" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.vert" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.vert" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" afterPath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" afterPath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/projekt1/Renderer.java" afterPath="$PROJECT_DIR$/src/projekt1/Renderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/MeshGenerator.java" afterPath="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,14 +22,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="69" column="44" lean-forward="false" selection-start-line="69" selection-start-column="44" selection-end-line="69" selection-end-column="44" />
+            <state relative-caret-position="3400">
+              <caret line="209" column="31" lean-forward="false" selection-start-line="209" selection-start-column="31" selection-end-line="209" selection-end-column="31" />
               <folding>
-                <element signature="e#3896#3897#0" expanded="true" />
-                <element signature="e#3974#3975#0" expanded="true" />
+                <element signature="e#3993#3994#0" expanded="true" />
+                <element signature="e#4071#4072#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -35,18 +38,28 @@
       <file leaf-file-name="simple.vert" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="172" column="29" lean-forward="true" selection-start-line="172" selection-start-column="29" selection-end-line="172" selection-end-column="29" />
+            <state relative-caret-position="392">
+              <caret line="224" column="0" lean-forward="false" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simple.frag" pinned="false" current-in-tab="false">
+      <file leaf-file-name="simple.frag" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="102" column="27" lean-forward="false" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+            <state relative-caret-position="171">
+              <caret line="91" column="10" lean-forward="false" selection-start-line="91" selection-start-column="10" selection-end-line="91" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -73,6 +86,7 @@
       <find>countli</find>
       <find>dirarra</find>
       <find>light(</find>
+      <find>colpo</find>
     </findStrings>
     <replaceStrings>
       <replace>normal</replace>
@@ -93,8 +107,9 @@
         <option value="$PROJECT_DIR$/src/oglutils/OGLTexture2D.java" />
         <option value="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
         <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
-        <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
         <option value="$PROJECT_DIR$/src/projekt1/Renderer.java" />
+        <option value="$PROJECT_DIR$/README" />
+        <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
       </list>
     </option>
   </component>
@@ -312,7 +327,7 @@
       <workItem from="1512494210568" duration="7017000" />
       <workItem from="1513195812707" duration="3807000" />
       <workItem from="1513774110848" duration="84804000" />
-      <workItem from="1514632088163" duration="43147000" />
+      <workItem from="1514632088163" duration="50656000" />
     </task>
     <task id="LOCAL-00001" summary="add spheric and cylindric function&#10;&#10;pridane sfericke a cylindricke fce (trumpeta, sloni hlava, sombrero)">
       <created>1511731949720</created>
@@ -405,11 +420,18 @@
       <option name="project" value="LOCAL" />
       <updated>1514677512726</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Dalsi uprava osvetleni&#10;&#10;prepinani, utlum ano/ne,">
+      <created>1514736617862</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1514736617862</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="190661000" />
+    <option name="totallyTimeSpent" value="198170000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -428,7 +450,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30994898" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -493,7 +515,8 @@
     <MESSAGE value="Parallax mapping" />
     <MESSAGE value="uprava v oglutils, uprava osvetleni" />
     <MESSAGE value="uprava osvetleni&#10;&#10;BlinPhong, Phong ve VS, ve FS umi i normal a paralax mapping" />
-    <option name="LAST_COMMIT_MESSAGE" value="uprava osvetleni&#10;&#10;BlinPhong, Phong ve VS, ve FS umi i normal a paralax mapping" />
+    <MESSAGE value="Dalsi uprava osvetleni&#10;&#10;prepinani, utlum ano/ne," />
+    <option name="LAST_COMMIT_MESSAGE" value="Dalsi uprava osvetleni&#10;&#10;prepinani, utlum ano/ne," />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -824,30 +847,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
+    <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="172" column="29" lean-forward="true" selection-start-line="172" selection-start-column="29" selection-end-line="172" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="102" column="27" lean-forward="false" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="69" column="44" lean-forward="false" selection-start-line="69" selection-start-column="44" selection-end-line="69" selection-end-column="44" />
+        <state relative-caret-position="3400">
+          <caret line="209" column="31" lean-forward="false" selection-start-line="209" selection-start-column="31" selection-end-line="209" selection-end-column="31" />
           <folding>
-            <element signature="e#3896#3897#0" expanded="true" />
-            <element signature="e#3974#3975#0" expanded="true" />
+            <element signature="e#3993#3994#0" expanded="true" />
+            <element signature="e#4071#4072#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="224" column="0" lean-forward="false" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="91" column="10" lean-forward="false" selection-start-line="91" selection-start-column="10" selection-end-line="91" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>

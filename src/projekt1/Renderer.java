@@ -30,8 +30,8 @@ public class Renderer implements GLEventListener, MouseListener,
     OGLBuffers buffers;
     OGLTextRenderer textRenderer;
 
-    int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso, lightType, locDirectionLight, locTexture, locAttLight, locAtten;
-    int typeTeleso = 1, typeLight = 0, typeTexture = 2, atten = 0;
+    int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso, lightType, locDirectionLight, locTexture, locAttLight, locAtten, locColored;
+    int typeTeleso = 1, typeLight = 0, typeTexture = 2, atten = 0, coloured = 0;
     int COUNTLIGHT = 4;
 
     OGLTexture texture, normTexture, bumpTexture;
@@ -93,6 +93,7 @@ public class Renderer implements GLEventListener, MouseListener,
         locAttLight = gl.glGetUniformLocation(shaderProgram, "lightDisArray");
         locTexture = gl.glGetUniformLocation(shaderProgram, "textureFormat");
         locAtten = gl.glGetUniformLocation(shaderProgram, "atten");
+        locColored = gl.glGetUniformLocation(shaderProgram, "colPos");
 
         cam = cam.withPosition(new Vec3D(5, 5, 2.5))
                 .withAzimuth(Math.PI * 1.25)
@@ -126,6 +127,7 @@ public class Renderer implements GLEventListener, MouseListener,
         gl.glUniform1i(lightType, typeLight);
         gl.glUniform1i(locTexture, typeTexture);
         gl.glUniform1i(locAtten, atten);
+        gl.glUniform1i(locColored, coloured);
 
         if (boolPolygon)
             gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_LINE); //prepinani mezi line a fill
@@ -190,22 +192,22 @@ public class Renderer implements GLEventListener, MouseListener,
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                cam = cam.forward(1);
+                cam = cam.forward(0.1);
                 break;
             case KeyEvent.VK_D:
-                cam = cam.right(1);
+                cam = cam.right(0.1);
                 break;
             case KeyEvent.VK_S:
-                cam = cam.backward(1);
+                cam = cam.backward(0.1);
                 break;
             case KeyEvent.VK_A:
-                cam = cam.left(1);
+                cam = cam.left(0.1);
                 break;
             case KeyEvent.VK_CONTROL:
-                cam = cam.down(1);
+                cam = cam.down(0.1);
                 break;
             case KeyEvent.VK_SHIFT:
-                cam = cam.up(1);
+                cam = cam.up(0.1);
                 break;
             case KeyEvent.VK_SPACE:
                 cam = cam.withFirstPerson(!cam.getFirstPerson());
@@ -218,6 +220,7 @@ public class Renderer implements GLEventListener, MouseListener,
                 break;
             case KeyEvent.VK_L:
                 typeLight = (typeLight + 1) % (COUNTLIGHT + 1);
+                coloured = 0;
                 System.out.print("L - " + typeLight);
                 break;
             case KeyEvent.VK_P:
@@ -234,11 +237,17 @@ public class Renderer implements GLEventListener, MouseListener,
                 break;
             case KeyEvent.VK_M:
                 typeTexture = (typeTexture + 1) % 3;
+                coloured = 0;
                 System.out.print("M - " + typeTexture);
                 break;
             case KeyEvent.VK_U:
                 atten = (atten + 1) % 2;
+                coloured = 0;
                 System.out.print("U - " + atten);
+                break;
+            case KeyEvent.VK_C:
+                coloured = (coloured + 1) % 4;
+                System.out.print("C - " + coloured);
                 break;
         }
     }
