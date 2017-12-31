@@ -9,6 +9,7 @@ uniform mat4 mat; // variable constant for all vertices in a single draw
 uniform vec3 lightPos;
 uniform vec3 camera; //eyePos
 uniform vec3 lightPosArray[LIGHTCOUNT];
+uniform vec3 lightDirArray[LIGHTCOUNT];
 uniform int lightType; //podle druhu lightType pouzije osvetleni
 uniform int teleso; //teleso, ktere se bude kreslit
 
@@ -133,63 +134,8 @@ vec3 surfacePosition(vec2 paramPos){ //vypocet souradnic gridu
         return vec3(cylindricPenthal(paramPos));
     return vec3(0,0,1);
 }
-vec3 phong(vec2 paramPos, int lightNum){ //v fragment shaderu bude per pixel, ted je per vertex
-   // vec3 inNormal = normal(paramPos); //vypocet normal pro dane teleso
-   // outNormal = inNormal;
-  //  vec3 position = surfacePosition(paramPos);
-  //  outPosition = position;
-    vec3 position = outPosition;
-    vec3 inNormal = outNormal;
-
-    vec3 positionLight = lightPosArray[lightNum];
-
-    vec3 matDifCol = vec3(0.8, 0.9, 0.6);
-    vec3 matSpecCol = vec3(1.0);
-    vec3 ambientLightCol = vec3(0.3, 0.1, 0.5);
-    vec3 directLightCol = vec3(1.0, 0.9, 0.9);
-
-    vec3 ambiComponent = ambientLightCol * matDifCol;
-
-    //float difCoef = max(0, dot(inNormal, normalize(lightPos-position)));
-    float difCoef = max(0, dot(inNormal, normalize(positionLight-position)));
-    vec3 difComponent = directLightCol * matDifCol * difCoef;
-
-    //vec3  reflected = reflect(normalize(position-lightPos), inNormal);
-    vec3  reflected = reflect(normalize(position-positionLight), inNormal);
-    float specCoef = pow(max(0, dot(normalize(camera-position),reflected)), 70);
-
-    vec3 specComponent = directLightCol * matSpecCol * specCoef;
-
-    return ambiComponent + difComponent + specComponent;
-}
-vec3 blinPhong(vec2 paramPos){ //v fragment shaderu bude per pixel, ted je per vertex
-    vec3 position = outPosition;
-    vec3 inNormal = normalize(outNormal);
-
-    vec3 matDifCol = vec3(0.8, 0.9, 0.6);
-    vec3 matSpecCol = vec3(1.0);
-    vec3 ambientLightCol = vec3(0.3, 0.1, 0.5);
-    vec3 directLightCol = vec3(1.0, 0.9, 0.9);
-
-    vec3 ambiComponent = ambientLightCol * matDifCol;
-
-    float difCoef = max(0, dot(inNormal, normalize(lightPos-position)));
-    vec3 difComponent = directLightCol * matDifCol * difCoef;
-
-    vec3  reflected = reflect(normalize(-(lightPos-position)), inNormal);
-    float specCoef = 0.0;
-    //float specCoef = pow(max(0, dot(normalize(camera-position),reflected)), 70);
-
-    if(difCoef > 0.0){
-        vec3 halfVector = normalize(normalize(lightPos-position) + normalize(camera-position));
-        specCoef = max(0,pow(dot(inNormal,halfVector), 70));  //70 lesklost
-    }
-    vec3 specComponent = matSpecCol * directLightCol * specCoef;
-
-    return ambiComponent + difComponent + specComponent;
-}
 void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, out vec3 specular){
-      vec3 inNormal = outNormal;
+         vec3 inNormal = outNormal;
 
          vec3 matDifCol = vec3(0.8, 0.9, 0.6);
          vec3 matSpecCol = vec3(1.0);
@@ -206,21 +152,15 @@ void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, 
           diffuse = directLightCol * matDifCol * difCoef;
     //     vec3 difComponent = directLightCol * matDifCol * difCoef;
 
-        vec3  reflected = reflect(normalize(position - lightPosArray[numberOfLight]), inNormal);
+         vec3  reflected = reflect(normalize(position - lightPosArray[numberOfLight]), inNormal);
          float specCoef = 0.0;
 
          if (lightType == 3) {// phong
             specCoef = pow(max(0, dot(dirCamera, reflected)), 70);
 
             specular = directLightCol * matSpecCol * specCoef;
-    //        vec3 specComponent = directLightCol * matSpecCol * specCoef;
-
-    //        ambient = ambiComponent;
-    //        diffuse = difComponent;
-    //        specular = specComponent;
          }
          if (lightType == 4){//blinphong
-            //float specCoef = pow(max(0, dot(normalize(camera-position),reflected)), 70);
 
             if(dot(inNormal, normalize(dirLight)) > 0.0){
               vec3 halfVector = normalize(dirLight + dirCamera);
@@ -229,25 +169,25 @@ void light(vec3 position, int numberOfLight, out vec3 ambient,out vec3 diffuse, 
               specular = directLightCol * matSpecCol * specCoef;
             }
          }
-    ////     //reflektorove svetlo
-    //     vec3 lightDirection = vec3(0,0,1);
-    //////      //uhel, pro kuzelovite svetlo, ve stupnich
-    //     float lightCutoff = 10;
-    //////
-    //    float spotEffect = degrees(acos(dot(normalize(lightDirection), normalize(-(lightPosArray[numberOfLight] - position)))));
-    //////    //vypocet rozmazani
-    //    float attBlear = clamp((spotEffect - lightCutoff) / (1 - lightCutoff),0.0,1.0);
-    //    if (spotEffect > lightCutoff) {
-    //        diffuse = vec3(0);
-    //        specular = vec3(0);
-    //     }
-    //    else {
-    //      vec3 specComponent = matSpecCol * directLightCol * specCoef;
-    //     specular = attBlear * specComponent;
-    //     diffuse *= attBlear;
-    //
-    //    }
-         //return ambiComponent + attBlear *(difComponent  + specComponent);
+         specular = directLightCol * matSpecCol * specCoef;
+        //reflektorove svetlo
+        vec3 lightDirection = lightDirArray[numberOfLight];
+        //uhel, pro kuzelovite svetlo, ve stupnich
+        float lightCutoff = 70;
+
+       float spotEffect = degrees(acos(dot(normalize(lightDirection), normalize(-dirLight))));
+       //vypocet rozmazani
+       float attBlear = clamp((spotEffect - lightCutoff) / (1 - lightCutoff),0.0,1.0);
+       if (spotEffect > lightCutoff) {
+           diffuse = vec3(0);
+           specular = vec3(0);
+        }
+       else {
+        vec3 specComponent = matSpecCol * directLightCol * specCoef;
+        specular *= attBlear * specComponent;
+        diffuse *= attBlear;
+
+       }
 }
 mat3 tangentMat(vec2 paramPos){
      vec2 dx = vec2(DELTA, 0);
@@ -287,14 +227,11 @@ void main() {
 //    vertColor = vec3(textureCoord, 0.0); // souradnice textury
 //  vertColor = vec3(sphere(inPosition));
     //vertColor = outPosition; //normal mapping
-//   if (lightType == 3) vertColor = phong(inPosition,0);
-//   if (lightType == 4) vertColor = blinPhong(inPosition);
+
 
     mat3 tanMat = tangentMat(inPosition);
     eyeVec =  (camera - outPosition) * tanMat;
     for (int i=0;i<LIGHTCOUNT;i++)
       lightVec[i] = (lightPosArray[i] - outPosition) * tanMat;
-//    lightVec = (lightPos - outPosition) * tanMat;
 
-//    vertColor = sphere(inPosition);
 }

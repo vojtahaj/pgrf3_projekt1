@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f63f2651-9b8c-43ce-b342-07105c41d116" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/oglutils/OGLTexture2D.class" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/oglutils/OGLTexture2D.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/projekt1/Renderer.class" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/projekt1/Renderer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.vert" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.vert" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.frag" afterPath="$PROJECT_DIR$/out/production/PGRF3_projekt1/lvl1basic/utils/simple.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" afterPath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" afterPath="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/projekt1/Renderer.java" afterPath="$PROJECT_DIR$/src/projekt1/Renderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/MeshGenerator.java" afterPath="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,12 +19,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="861">
-              <caret line="79" column="17" lean-forward="false" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="191">
+              <caret line="69" column="44" lean-forward="false" selection-start-line="69" selection-start-column="44" selection-end-line="69" selection-end-column="44" />
+              <folding>
+                <element signature="e#3896#3897#0" expanded="true" />
+                <element signature="e#3974#3975#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -33,18 +35,18 @@
       <file leaf-file-name="simple.vert" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5015">
-              <caret line="295" column="16" lean-forward="false" selection-start-line="295" selection-start-column="16" selection-end-line="295" selection-end-column="16" />
+            <state relative-caret-position="85">
+              <caret line="172" column="29" lean-forward="true" selection-start-line="172" selection-start-column="29" selection-end-line="172" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simple.frag" pinned="false" current-in-tab="true">
+      <file leaf-file-name="simple.frag" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1921">
-              <caret line="113" column="4" lean-forward="false" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="4" />
+            <state relative-caret-position="110">
+              <caret line="102" column="27" lean-forward="false" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -68,6 +70,9 @@
       <find>phong</find>
       <find>surfaceN</find>
       <find>loccamera</find>
+      <find>countli</find>
+      <find>dirarra</find>
+      <find>light(</find>
     </findStrings>
     <replaceStrings>
       <replace>normal</replace>
@@ -85,11 +90,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/shaders/lvl1basic/p02geometry/p01cube/simple.frag" />
-        <option value="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
         <option value="$PROJECT_DIR$/src/oglutils/OGLTexture2D.java" />
-        <option value="$PROJECT_DIR$/src/projekt1/Renderer.java" />
+        <option value="$PROJECT_DIR$/src/utils/MeshGenerator.java" />
         <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert" />
         <option value="$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag" />
+        <option value="$PROJECT_DIR$/src/projekt1/Renderer.java" />
       </list>
     </option>
   </component>
@@ -307,7 +312,7 @@
       <workItem from="1512494210568" duration="7017000" />
       <workItem from="1513195812707" duration="3807000" />
       <workItem from="1513774110848" duration="84804000" />
-      <workItem from="1514632088163" duration="25769000" />
+      <workItem from="1514632088163" duration="43147000" />
     </task>
     <task id="LOCAL-00001" summary="add spheric and cylindric function&#10;&#10;pridane sfericke a cylindricke fce (trumpeta, sloni hlava, sombrero)">
       <created>1511731949720</created>
@@ -393,11 +398,18 @@
       <option name="project" value="LOCAL" />
       <updated>1514650521946</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="uprava osvetleni&#10;&#10;BlinPhong, Phong ve VS, ve FS umi i normal a paralax mapping">
+      <created>1514677512726</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1514677512726</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173283000" />
+    <option name="totallyTimeSpent" value="190661000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -411,7 +423,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3275401" sideWeight="0.4362245" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32068062" sideWeight="0.56377554" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32068062" sideWeight="0.56377554" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -422,7 +434,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39921466" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -445,7 +457,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39921466" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -480,10 +492,13 @@
     <MESSAGE value="Normal mapping" />
     <MESSAGE value="Parallax mapping" />
     <MESSAGE value="uprava v oglutils, uprava osvetleni" />
-    <option name="LAST_COMMIT_MESSAGE" value="uprava v oglutils, uprava osvetleni" />
+    <MESSAGE value="uprava osvetleni&#10;&#10;BlinPhong, Phong ve VS, ve FS umi i normal a paralax mapping" />
+    <option name="LAST_COMMIT_MESSAGE" value="uprava osvetleni&#10;&#10;BlinPhong, Phong ve VS, ve FS umi i normal a paralax mapping" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -778,13 +793,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/MeshGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="66" column="37" lean-forward="false" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/textures/bricks.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -808,27 +816,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
+    <entry file="file://$PROJECT_DIR$/src/utils/MeshGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="79" column="17" lean-forward="false" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="17" />
+        <state relative-caret-position="250">
+          <caret line="64" column="7" lean-forward="false" selection-start-line="64" selection-start-column="7" selection-end-line="64" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.vert">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5015">
-          <caret line="295" column="16" lean-forward="false" selection-start-line="295" selection-start-column="16" selection-end-line="295" selection-end-column="16" />
+        <state relative-caret-position="85">
+          <caret line="172" column="29" lean-forward="true" selection-start-line="172" selection-start-column="29" selection-end-line="172" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shaders/lvl1basic/utils/simple.frag">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1921">
-          <caret line="113" column="4" lean-forward="false" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="4" />
+        <state relative-caret-position="110">
+          <caret line="102" column="27" lean-forward="false" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/projekt1/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="69" column="44" lean-forward="false" selection-start-line="69" selection-start-column="44" selection-end-line="69" selection-end-column="44" />
+          <folding>
+            <element signature="e#3896#3897#0" expanded="true" />
+            <element signature="e#3974#3975#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

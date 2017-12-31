@@ -25,13 +25,13 @@ public class Renderer implements GLEventListener, MouseListener,
         MouseMotionListener, KeyListener {
 
     int width, height, ox, oy;
-    boolean boolPolygon, boolTexture = true;
+    boolean boolPolygon;
 
     OGLBuffers buffers;
     OGLTextRenderer textRenderer;
 
-    int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso, lightType;
-    int typeTeleso = 1, typeLight = 0;
+    int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso, lightType, locDirectionLight, locTexture, locAttLight, locAtten;
+    int typeTeleso = 1, typeLight = 0, typeTexture = 2, atten = 0;
     int COUNTLIGHT = 4;
 
     OGLTexture texture, normTexture, bumpTexture;
@@ -39,7 +39,9 @@ public class Renderer implements GLEventListener, MouseListener,
     OGLTexture2D.Viewer textureViever;
 
     Vec3D lightPos = new Vec3D(0, 0, -10);
-    List<Vec3D> lightPosArray = new ArrayList(); // pole vec3d pozic svetla
+    List<Vec3D> lightPosArray = new ArrayList<>(); // pole vec3d pozic svetla
+    List<Vec3D> lightDirArray = new ArrayList<>(); // pole smeru svitu svetla
+    List<Vec3D> lightDisArray = new ArrayList<>(); // pole s utlumem pro svetlo
 
     Camera cam = new Camera();
     Mat4 proj; // created in reshape()
@@ -61,8 +63,14 @@ public class Renderer implements GLEventListener, MouseListener,
         normTexture = new OGLTexture2D(gl, "/textures/bricksn.png");
         bumpTexture = new OGLTexture2D(gl, "/textures/bricksh.png");
 
-        lightPosArray.add(new Vec3D(0, 0, 10));
         lightPosArray.add(new Vec3D(0, 0, -10));
+        lightPosArray.add(new Vec3D(0, 0, 10));
+
+        lightDirArray.add(new Vec3D(0, 0, 3));
+        lightDirArray.add(new Vec3D(0, 0, -15));
+
+        lightDisArray.add(new Vec3D(0.01, 0.01, 0.01));
+        lightDisArray.add(new Vec3D(0.001, 0.02, -0.03));
 
         gl.glTexParameteri(GL2GL3.GL_TEXTURE_2D, GL2GL3.GL_TEXTURE_WRAP_S, GL2GL3.GL_REPEAT);
         gl.glTexParameteri(GL2GL3.GL_TEXTURE_2D, GL2GL3.GL_TEXTURE_WRAP_T, GL2GL3.GL_REPEAT);
@@ -79,9 +87,12 @@ public class Renderer implements GLEventListener, MouseListener,
         locLight = gl.glGetUniformLocation(shaderProgram, "lightPos");
         locCamera = gl.glGetUniformLocation(shaderProgram, "camera");
         locPositionLight = gl.glGetUniformLocation(shaderProgram, "lightPosArray");
-        locTeleso = gl.glGetUniformLocation(shaderProgram,"teleso");
-        lightType = gl.glGetUniformLocation(shaderProgram,"lightType");
-
+        locTeleso = gl.glGetUniformLocation(shaderProgram, "teleso");
+        lightType = gl.glGetUniformLocation(shaderProgram, "lightType");
+        locDirectionLight = gl.glGetUniformLocation(shaderProgram, "lightDirArray");
+        locAttLight = gl.glGetUniformLocation(shaderProgram, "lightDisArray");
+        locTexture = gl.glGetUniformLocation(shaderProgram, "textureFormat");
+        locAtten = gl.glGetUniformLocation(shaderProgram, "atten");
 
         cam = cam.withPosition(new Vec3D(5, 5, 2.5))
                 .withAzimuth(Math.PI * 1.25)
@@ -92,60 +103,6 @@ public class Renderer implements GLEventListener, MouseListener,
 
     void createBuffers(GL2GL3 gl) {
         buffers = MeshGenerator.generateGrid(gl, 20, 20, "inPosition");
-        // vertices are not shared among triangles (and thus faces) so each face
-        // can have a correct normal in all vertices
-        // also because of this, the vertices can be directly drawn as GL_TRIANGLES
-        // (three and three vertices form one face)
-        // triangles defined in index buffer
-        /*float[] cube = {
-				// bottom (z-) face
-				1, 0, 0,	0, 0, -1,
-				0, 0, 0,	0, 0, -1,
-				1, 1, 0,	0, 0, -1,
-				0, 1, 0,	0, 0, -1,
-				// top (z+) face
-				1, 0, 1,	0, 0, 1,
-				0, 0, 1,	0, 0, 1,
-				1, 1, 1,	0, 0, 1,
-				0, 1, 1,	0, 0, 1,
-				// x+ face
-				1, 1, 0,	1, 0, 0,
-				1, 0, 0,	1, 0, 0,
-				1, 1, 1,	1, 0, 0,
-				1, 0, 1,	1, 0, 0,
-				// x- face
-				0, 1, 0,	-1, 0, 0,
-				0, 0, 0,	-1, 0, 0,
-				0, 1, 1,	-1, 0, 0,
-				0, 0, 1,	-1, 0, 0,
-				// y+ face
-				1, 1, 0,	0, 1, 0,
-				0, 1, 0,	0, 1, 0,
-				1, 1, 1,	0, 1, 0,
-				0, 1, 1,	0, 1, 0,
-				// y- face
-				1, 0, 0,	0, -1, 0,
-				0, 0, 0,	0, -1, 0,
-				1, 0, 1,	0, -1, 0,
-				0, 0, 1,	0, -1, 0
-		};
-
-		int[] indexBufferData = new int[36];
-		for (int i = 0; i<6; i++){
-			indexBufferData[i*6] = i*4;
-			indexBufferData[i*6 + 1] = i*4 + 1;
-			indexBufferData[i*6 + 2] = i*4 + 2;
-			indexBufferData[i*6 + 3] = i*4 + 1;
-			indexBufferData[i*6 + 4] = i*4 + 2;
-			indexBufferData[i*6 + 5] = i*4 + 3;
-		}
-		OGLBuffers.Attrib[] attributes = {
-				new OGLBuffers.Attrib("inPosition", 3),
-				new OGLBuffers.Attrib("inNormal", 3)
-		};
-
-		buffers = new OGLBuffers(gl, cube, attributes, indexBufferData);
-	*/
     }
 
 
@@ -163,28 +120,27 @@ public class Renderer implements GLEventListener, MouseListener,
         gl.glUniform3fv(locLight, 1, ToFloatArray.convert(lightPos), 0);
         gl.glUniform3fv(locCamera, 1, ToFloatArray.convert(cam.getEye()), 0);
         gl.glUniform3fv(locPositionLight, lightPosArray.size(), ToFloatArray.convert(lightPosArray), 0);
-        gl.glUniform1i(locTeleso,typeTeleso);
-        gl.glUniform1i(lightType,typeLight);
+        gl.glUniform3fv(locDirectionLight, lightDirArray.size(), ToFloatArray.convert(lightDirArray), 0);
+        gl.glUniform3fv(locAttLight, lightDisArray.size(), ToFloatArray.convert(lightDisArray), 0);
+        gl.glUniform1i(locTeleso, typeTeleso);
+        gl.glUniform1i(lightType, typeLight);
+        gl.glUniform1i(locTexture, typeTexture);
+        gl.glUniform1i(locAtten, atten);
 
-       if (boolPolygon)
-           gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_LINE); //prepinani mezi line a fill
+        if (boolPolygon)
+            gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_LINE); //prepinani mezi line a fill
         else gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
 
         buffers.draw(GL2GL3.GL_TRIANGLES, shaderProgram);
-//        if (boolTexture) {
-            texture.bind(shaderProgram, "diffTexture", 0);
-           // textureViever.view(texture, -1, -1, 0.5); //umisteni textury
-            normTexture.bind(shaderProgram,"normTexture",1);
-           // textureViever.view(normTexture, -1, -1, 0.5); //umisteni textury
-            bumpTexture.bind(shaderProgram, "bumpTexture",2);
-//        }
+        texture.bind(shaderProgram, "diffTexture", 0);
+        normTexture.bind(shaderProgram, "normTexture", 1);
+        bumpTexture.bind(shaderProgram, "bumpTexture", 2);
+
 
         String text = new String(this.getClass().getName() + ": [LMB] camera, WSAD");
 
         textRenderer.drawStr2D(3, height - 20, text);
         textRenderer.drawStr2D(width - 90, 3, " (c) PGRF UHK");
-
-        //System.out.println(typeTeleso);
     }
 
     @Override
@@ -261,14 +217,11 @@ public class Renderer implements GLEventListener, MouseListener,
                 cam = cam.mulRadius(1.1f);
                 break;
             case KeyEvent.VK_L:
-               typeLight = (typeLight+1) % (COUNTLIGHT+1);
-                System.out.print(typeLight);
-               break;
+                typeLight = (typeLight + 1) % (COUNTLIGHT + 1);
+                System.out.print("L - " + typeLight);
+                break;
             case KeyEvent.VK_P:
                 boolPolygon = !boolPolygon;
-                break;
-            case KeyEvent.VK_X:
-                boolTexture = !boolTexture;
                 break;
             case KeyEvent.VK_Q:
                 typeTeleso = 2;
@@ -278,6 +231,14 @@ public class Renderer implements GLEventListener, MouseListener,
                 break;
             case KeyEvent.VK_T:
                 typeTeleso = 1;
+                break;
+            case KeyEvent.VK_M:
+                typeTexture = (typeTexture + 1) % 3;
+                System.out.print("M - " + typeTexture);
+                break;
+            case KeyEvent.VK_U:
+                atten = (atten + 1) % 2;
+                System.out.print("U - " + atten);
                 break;
         }
     }
