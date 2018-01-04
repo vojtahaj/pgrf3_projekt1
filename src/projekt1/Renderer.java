@@ -30,9 +30,9 @@ public class Renderer implements GLEventListener, MouseListener,
     OGLBuffers buffers;
     OGLTextRenderer textRenderer;
 
-    int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso, lightType, locDirectionLight, locTexture, locAttLight, locAtten, locColored;
-    int typeTeleso = 1, typeLight = 0, typeTexture = 2, atten = 0, coloured = 0;
-    int COUNTLIGHT = 4;
+    int shaderProgram, locMat, locLight, locCamera, locPositionLight, locTeleso, lightType, locDirectionLight, locTexture, locAttLight, locAtten, locColored, locLightParam, locMaterial;
+    int typeTeleso = 1, typeLight = 0, typeTexture = 2, atten = 0, coloured = 0, lightParamType = 0;
+    int COUNTLIGHT = 4, COUNTBODY = 8, COUNT_TEXUTRE = 3;
 
     OGLTexture texture, normTexture, bumpTexture;
 
@@ -41,7 +41,8 @@ public class Renderer implements GLEventListener, MouseListener,
     Vec3D lightPos = new Vec3D(0, 0, -10);
     List<Vec3D> lightPosArray = new ArrayList<>(); // pole vec3d pozic svetla
     List<Vec3D> lightDirArray = new ArrayList<>(); // pole smeru svitu svetla
-    List<Vec3D> lightDisArray = new ArrayList<>(); // pole s utlumem pro svetlo
+    List<Vec3D> lightAttArray = new ArrayList<>(); // pole s utlumem pro svetlo
+    List<Vec3D> lightParam = new ArrayList<>(); //parametry svetla
 
     Camera cam = new Camera();
     Mat4 proj; // created in reshape()
@@ -69,8 +70,20 @@ public class Renderer implements GLEventListener, MouseListener,
         lightDirArray.add(new Vec3D(0, 0, 3));
         lightDirArray.add(new Vec3D(0, 0, -15));
 
-        lightDisArray.add(new Vec3D(0.01, 0.01, 0.01));
-        lightDisArray.add(new Vec3D(0.001, 0.02, -0.03));
+        lightAttArray.add(new Vec3D(3, 0, 0));
+        lightAttArray.add(new Vec3D(3, 0, 0));
+
+        lightParam.add(new Vec3D(0.8, 0.9, 0.6)); //matDifColor
+        lightParam.add(new Vec3D(1.0));//MatSpecColor
+        lightParam.add(new Vec3D(0.3, 0.1, 0.5)); //ambientLightCol
+        lightParam.add(new Vec3D(1.0, 0.9, 0.9)); //directLightCol
+        lightParam.add(new Vec3D(70)); //lesk - neni uplne nejidealnejsi reseni, lepsi resit pomoci matice
+
+        lightParam.add(new Vec3D(0.714, 0.4284, 0.18144)); //matDifColor
+        lightParam.add(new Vec3D(0.393548, 0.271906, 0.166721));//MatSpecColor
+        lightParam.add(new Vec3D(0.2125, 0.1275, 0.054)); //ambientLightCol
+        lightParam.add(new Vec3D(1.0, 0.9, 0.9)); //directLightCol
+        lightParam.add(new Vec3D(25.6)); //lesk
 
         gl.glTexParameteri(GL2GL3.GL_TEXTURE_2D, GL2GL3.GL_TEXTURE_WRAP_S, GL2GL3.GL_REPEAT);
         gl.glTexParameteri(GL2GL3.GL_TEXTURE_2D, GL2GL3.GL_TEXTURE_WRAP_T, GL2GL3.GL_REPEAT);
@@ -91,9 +104,11 @@ public class Renderer implements GLEventListener, MouseListener,
         lightType = gl.glGetUniformLocation(shaderProgram, "lightType");
         locDirectionLight = gl.glGetUniformLocation(shaderProgram, "lightDirArray");
         locAttLight = gl.glGetUniformLocation(shaderProgram, "lightDisArray");
+        locMaterial = gl.glGetUniformLocation(shaderProgram, "materials");
         locTexture = gl.glGetUniformLocation(shaderProgram, "textureFormat");
         locAtten = gl.glGetUniformLocation(shaderProgram, "atten");
         locColored = gl.glGetUniformLocation(shaderProgram, "colPos");
+        locLightParam = gl.glGetUniformLocation(shaderProgram, "lightParam");
 
         cam = cam.withPosition(new Vec3D(5, 5, 2.5))
                 .withAzimuth(Math.PI * 1.25)
@@ -122,12 +137,14 @@ public class Renderer implements GLEventListener, MouseListener,
         gl.glUniform3fv(locCamera, 1, ToFloatArray.convert(cam.getEye()), 0);
         gl.glUniform3fv(locPositionLight, lightPosArray.size(), ToFloatArray.convert(lightPosArray), 0);
         gl.glUniform3fv(locDirectionLight, lightDirArray.size(), ToFloatArray.convert(lightDirArray), 0);
-        gl.glUniform3fv(locAttLight, lightDisArray.size(), ToFloatArray.convert(lightDisArray), 0);
+        gl.glUniform3fv(locAttLight, lightAttArray.size(), ToFloatArray.convert(lightAttArray), 0);
+        gl.glUniform3fv(locMaterial, lightParam.size(), ToFloatArray.convert(lightParam),0);
         gl.glUniform1i(locTeleso, typeTeleso);
         gl.glUniform1i(lightType, typeLight);
         gl.glUniform1i(locTexture, typeTexture);
         gl.glUniform1i(locAtten, atten);
         gl.glUniform1i(locColored, coloured);
+        gl.glUniform1i(locLightParam, lightParamType);
 
         if (boolPolygon)
             gl.glPolygonMode(GL2GL3.GL_FRONT_AND_BACK, GL2GL3.GL_LINE); //prepinani mezi line a fill
@@ -221,33 +238,34 @@ public class Renderer implements GLEventListener, MouseListener,
             case KeyEvent.VK_L:
                 typeLight = (typeLight + 1) % (COUNTLIGHT + 1);
                 coloured = 0;
-                System.out.print("L - " + typeLight);
+                System.out.println("L - " + typeLight);
                 break;
             case KeyEvent.VK_P:
                 boolPolygon = !boolPolygon;
                 break;
             case KeyEvent.VK_Q:
-                typeTeleso = 2;
-                break;
-            case KeyEvent.VK_E:
-                typeTeleso = 3;
-                break;
-            case KeyEvent.VK_T:
-                typeTeleso = 1;
+                typeTeleso = (typeTeleso + 1) % COUNTBODY;
+                System.out.println("Q - " + typeTeleso);
                 break;
             case KeyEvent.VK_M:
-                typeTexture = (typeTexture + 1) % 3;
+                typeTexture = (typeTexture + 1) % COUNT_TEXUTRE;
                 coloured = 0;
-                System.out.print("M - " + typeTexture);
+                System.out.println("M - " + typeTexture);
                 break;
             case KeyEvent.VK_U:
                 atten = (atten + 1) % 2;
                 coloured = 0;
-                System.out.print("U - " + atten);
+                System.out.println("U - " + atten);
                 break;
             case KeyEvent.VK_C:
                 coloured = (coloured + 1) % 4;
-                System.out.print("C - " + coloured);
+                System.out.println("C - " + coloured);
+                break;
+            case KeyEvent.VK_V:
+                if (lightParamType == 5)
+                    lightParamType = 0;
+                else lightParamType = 5;
+                System.out.println("V - " + lightParamType);
                 break;
         }
     }
